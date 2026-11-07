@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Case study, Yael</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&family=Instrument+Serif&display=swap">
+  <link rel="stylesheet" href="styles/tokens.css">
+  <link rel="stylesheet" href="styles/global.css">
+  <link rel="stylesheet" href="styles/case.css"></head>
+<body>
+
+  <header class="site-header">
+    <nav class="site-nav" aria-label="Main">
+      <a class="nav-link" href="index.html#work" aria-current="page">Work</a>
+      <a class="nav-link" href="index.html#about">About</a>
+      <a class="nav-link" href="index.html#contact">Contact</a>
+    </nav>
+  </header>
+
+  <!-- Everything marked data-field is filled from scripts/projects.js by scripts/case.js.
+       Open a project with case-study.html?project=minuteful (or life-tribute, checklist). -->
+  <main class="wrap">
+
+    <div class="case-title">
+      <div class="case-title-main">
+        <a class="back-link" href="index.html#work">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M10 3 5 8l5 5"/></svg>
+          All work
+        </a>
+        <h1 class="display" data-field="name">Project</h1>
+      </div>
+      <p class="case-outcome" data-field="outcome"></p>
+    </div>
+
+    <div class="case-hero">
+      <img class="case-hero-bg" data-field="backdrop" src="" alt="">
+      <img class="case-shot" data-field="image" src="" alt="">
+    </div>
+
+    <dl class="case-meta">
+      <div><dt>Role</dt><dd data-field="role">[Your role]</dd></div>
+      <div><dt>Industry</dt><dd data-field="industry"></dd></div>
+      <div><dt>Company</dt><dd data-field="company">[Company]</dd></div>
+      <div><dt>Year</dt><dd data-field="year">[Year]</dd></div>
+    </dl>
+
+    <p class="case-lead display">[One or two sentences: the problem, who had it, and what changed because of your work on <span data-field="name"></span>.]</p>
+
+    <section class="case-chapters" aria-labelledby="chapters-heading">
+      <h2 id="chapters-heading" class="case-section-title">How it came together</h2>
+      <div class="chapter-list"></div>
+    </section>
+
+    <section class="case-impact" aria-labelledby="impact-heading">
+      <h2 id="impact-heading" class="case-section-title">Impact</h2>
+      <div class="impact-grid">
+        <div>
+          <span class="impact-number display">[00%]</span>
+          <p>[What improved, and how you measured it.]</p>
+        </div>
+        <div>
+          <span class="impact-number display">[0x]</span>
+          <p>[A second measurable change.]</p>
+        </div>
+        <div>
+          <span class="impact-number display">[00k]</span>
+          <p>[Reach, adoption or another number that shows scale.]</p>
+        </div>
+      </div>
+      <div class="case-team">
+        <span class="case-team-label">Team</span>
+        <span>[Name], [Role]</span>
+        <span>[Name], [Role]</span>
+        <span>[Name], [Role]</span>
+      </div>
+    </section>
+
+    <nav class="project-nav" aria-label="More projects">
+      <a class="project-link is-prev" data-field="prev" href="#">
+        <span class="glimpse" aria-hidden="true"><img src="" alt=""></span>
+        <span class="project-link-label">Previous project</span>
+        <span class="project-link-name display"></span>
+      </a>
+      <a class="project-link is-next" data-field="next" href="#">
+        <span class="glimpse" aria-hidden="true"><img src="" alt=""></span>
+        <span class="project-link-label">Next project</span>
+        <span class="project-link-name display"></span>
+      </a>
+    </nav>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <p>© 2026 Yael. Designed and built by me.</p>
+      <button class="text-button" type="button" data-back-to-top>Back to top</button>
+    </div>
+  </footer>
+
+  <!-- One chapter; copied once per chapter by case.js -->
+  <template id="chapter-template">
+    <article class="chapter">
+      <div class="chapter-head">
+        <span class="chapter-num"></span>
+        <h3 class="chapter-title display"></h3>
+        <p class="chapter-line"></p>
+      </div>
+      <div class="chapter-body">
+        <div class="chapter-text"></div>
+        <div class="chapter-media"></div>
+      </div>
+    </article>
+  </template>
+
+  <script src="scripts/projects.js"></script>
+  <script src="scripts/case.js"></script>
+</body>
+</html>

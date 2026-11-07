@@ -1,0 +1,646 @@
+/* ---------- Above the fold ---------- */
+.case-title {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+  gap: 48px;
+  align-items: end;
+  margin-top: 150px;
+}
+.case-title-main { display: flex; flex-direction: column; gap: 20px; min-width: 0; }
+.case-title h1 {
+  margin: 0;
+  font-size: clamp(56px, 9vw, 136px);
+  line-height: 0.9;
+}
+.case-outcome { margin: 0; max-width: 30ch; font-size: 24px; line-height: 1.35; letter-spacing: -0.01em; }
+
+.back-link {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 0;
+  color: var(--muted);
+  font-size: 16px;
+  text-decoration: none;
+  transition: color .3s ease;
+}
+.back-link:hover { color: var(--ink); }
+
+/* Hero: product shot on a grainy colour backdrop */
+.case-hero {
+  position: relative;
+  margin-top: 48px;
+  aspect-ratio: 16 / 9;
+  border-radius: var(--r-xl);
+  overflow: hidden;
+  background: var(--line);
+}
+.case-hero-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.case-shot {
+  position: absolute;
+  left: 8%; top: 9%;
+  width: 84%;
+  border-radius: var(--r-md);
+  box-shadow: var(--shadow-float);
+  transition: transform .9s var(--ease-out);
+}
+.case-hero:hover .case-shot { transform: translateY(-10px); }
+
+.case-meta {
+  margin: 43px 0 0;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 24px 32px;
+}
+.case-meta > div { border-top: 1px solid var(--line); padding-top: 14px; }
+.case-meta dt { font-size: 14px; color: var(--muted); }
+.case-meta dd { margin: 4px 0 0; font-size: 17px; line-height: 1.4; }
+
+.case-lead {
+  margin: 168px auto 0;
+  max-width: 34ch;
+  text-align: center;
+  font-size: 36px;
+  line-height: 1.18;
+}
+
+.case-section-title { margin: 0 0 16px; font-size: 22px; font-weight: 500; }
+
+/* ---------- Chapters (all open, read straight down) ---------- */
+.case-chapters { margin-top: 192px; }
+.chapter-list { border-bottom: 0; }
+.chapter { border-top: 1px solid var(--line); padding: 84px 0 132px; }
+.chapter-head {
+  display: grid;
+  grid-template-columns: 56px minmax(0, 1.1fr) minmax(0, 1.4fr);
+  gap: 24px;
+  align-items: baseline;
+}
+.chapter-num { font-size: 15px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.chapter-title { margin: 0; font-size: 36px; line-height: 1.18; }
+.chapter-line { margin: 0; font-size: 16px; line-height: 1.45; color: var(--muted); }
+/* subtitle: the line sits under the title (phones already stack it this way),
+   as large as the paragraph text and as dark as the title */
+.chapter.has-subtitle .chapter-line { font-size: 22px; line-height: 1.2; color: var(--ink); }
+@media (min-width: 761px) {
+  .chapter.has-subtitle .chapter-head { grid-template-columns: 56px minmax(0, 1fr); row-gap: 7.5px; }
+  .chapter.has-subtitle .chapter-line { grid-column: 2; }
+}
+.chapter-body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr);
+  gap: 48px;
+  padding: 21px 0 0 80px;
+}
+.chapter-text { margin: 0; max-width: 44ch; font-size: 18px; line-height: 1.65; color: var(--ink); }
+.chapter-text p { margin: 0; }
+.chapter-text p + p { margin-top: 1em; }
+.chapter-points { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 14px; }
+.chapter-points li { padding-left: 18px; position: relative; color: var(--ink); }
+.chapter-points li::before { content: ''; position: absolute; left: 0; top: .72em; width: 6px; height: 6px; border-radius: 50%; background: var(--muted); }
+/* quotations carry no bullet dot */
+.chapter-points.is-quotes li { padding-left: 0; }
+.chapter-points.is-quotes li::before { display: none; }
+/* the opening quote mark, set very large above each quotation */
+.chapter-points.is-quotes .quote-mark {
+  display: block;
+  font-family: var(--font-serif);
+  font-size: 220px;
+  line-height: 1;
+  height: .3em;
+  margin: -.04em 0 16px .02em;
+  color: var(--ink);
+}
+/* full-width image under the text, for wide compositions */
+.chapter.is-wide .chapter-body { grid-template-columns: minmax(0, 1fr); gap: 36px; }
+.chapter.is-wide .chapter-text { max-width: 72ch; }
+/* text only: the paragraphs sit side by side (stacked again on phones) */
+@media (min-width: 761px) {
+  .chapter.is-split .chapter-body { grid-template-columns: minmax(0, 1fr); }
+  .chapter.is-split .chapter-text {
+    max-width: none;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 48px;
+  }
+  .chapter.is-split .chapter-text p + p { margin-top: 0; }
+  /* a list with no image spreads across the chapter, one column per item */
+  .chapter.is-split .chapter-points {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(0, 1fr);
+    gap: 48px;
+  }
+}
+.chapter-media {
+  position: relative;
+  aspect-ratio: 1.6;
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  background: var(--surface);
+  /* hairline ring plus a soft, low shadow, on every image and clip */
+  box-shadow: var(--shadow-ring), 0 12px 28px -14px rgba(17, 17, 17, 0.2);
+}
+.chapter-media img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+}
+/* images composed in Figma keep their own proportions and white canvas */
+.chapter-media.is-composed { aspect-ratio: auto; align-self: start; background: #fff; }
+.chapter-media.is-composed img { position: static; display: block; height: auto; }
+.placeholder {
+  position: absolute; inset: 12px;
+  display: flex; align-items: center; justify-content: center;
+  padding: 16px;
+  text-align: center;
+  border: 1px dashed var(--muted);
+  border-radius: var(--r-sm);
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.4;
+}
+
+/* ---------- Impact ---------- */
+/* same rhythm as the chapters: 84px below a divider, after a chapter's own 132px bottom padding */
+.case-impact { margin-top: 84px; }
+.case-impact .case-section-title { margin-bottom: 32px; }
+.impact-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 40px 48px;
+}
+.impact-grid > div { display: flex; flex-direction: column; gap: 14px; }
+.impact-number { font-size: 112px; line-height: 0.85; letter-spacing: -0.06em; }
+.impact-grid p { margin: 0; max-width: 32ch; font-size: 17px; line-height: 1.5; color: var(--muted); }
+.case-team {
+  margin-top: 72px;
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+  display: flex; flex-wrap: wrap; gap: 8px 32px;
+  font-size: 16px; line-height: 1.5;
+}
+.case-team-label { color: var(--muted); }
+
+/* ---------- Previous / next with a hover glimpse ---------- */
+.project-nav {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 48px;
+  margin-top: 176px;
+  border-top: 1px solid var(--line);
+}
+.project-link {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 48px 0 56px;
+  text-decoration: none;
+  color: var(--ink);
+}
+.project-link.is-next { align-items: flex-end; text-align: right; }
+.project-link-label { font-size: 15px; color: var(--muted); }
+.project-link-name {
+  font-size: 56px;
+  line-height: 1;
+  transition: transform .45s var(--ease-out);
+}
+.project-link.is-prev:hover .project-link-name { transform: translateX(10px); }
+.project-link.is-next:hover .project-link-name { transform: translateX(-10px); }
+
+.glimpse {
+  position: absolute;
+  bottom: calc(100% - 28px);
+  width: 360px;
+  aspect-ratio: 1.8;
+  border-radius: var(--r-md);
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 2;
+  background: var(--surface);
+  box-shadow: var(--shadow-float);
+  transition: opacity .3s ease, transform .5s var(--ease-out);
+}
+.glimpse img { width: 100%; height: 100%; object-fit: cover; object-position: top; }.is-prev .glimpse { left: 0; transform-origin: left bottom; transform: translateY(28px) rotate(-4deg) scale(.92); }
+.is-next .glimpse { right: 0; transform-origin: right bottom; transform: translateY(28px) rotate(4deg) scale(.92); }
+.is-prev:hover .glimpse, .is-prev:focus-visible .glimpse { opacity: 1; transform: translateY(0) rotate(-2deg) scale(1); }
+.is-next:hover .glimpse, .is-next:focus-visible .glimpse { opacity: 1; transform: translateY(0) rotate(2deg) scale(1); }
+
+/* ---------- Phones ---------- */
+@media (max-width: 760px) {
+  .case-title { grid-template-columns: minmax(0, 1fr); gap: 16px; margin-top: 96px; }
+  .case-hero { aspect-ratio: 1.05; border-radius: var(--r-lg); }
+  .case-shot { width: 150%; left: 8%; top: 12%; }
+  .case-hero:hover .case-shot { transform: none; }
+  .case-meta { grid-template-columns: repeat(2, minmax(0, 1fr)); margin-top: 30px; }
+  .case-lead { font-size: 26px; margin-top: 108px; }
+  .chapter-title { font-size: 26px; }
+  .case-chapters { margin-top: 132px; }
+  .chapter-head { grid-template-columns: 36px minmax(0, 1fr); gap: 6px 12px; }
+  .chapter-line { grid-column: 2; }
+  .chapter-body { grid-template-columns: minmax(0, 1fr); gap: 20px; padding-left: 0; }
+  .impact-grid { grid-template-columns: minmax(0, 1fr); }
+  .impact-number { font-size: 72px; }
+  .project-nav { grid-template-columns: minmax(0, 1fr); margin-top: 112px; }
+  .project-link { padding: 28px 0; align-items: flex-start; }
+  .project-link.is-next { align-items: flex-start; text-align: left; border-top: 1px solid var(--line); }
+  .project-link-name { font-size: 36px; }
+  /* no hover on phones, so the glimpse is always shown as a strip */
+  .glimpse {
+    position: relative; bottom: auto; left: auto; right: auto;
+    width: 100%; aspect-ratio: 2.6;
+    opacity: 1; transform: none !important;
+    margin-bottom: 12px;
+  }
+}
+
+/* Hero for a project with a video or a composed head image: it fills the frame, no backdrop around it */
+.case-hero.is-video,
+.case-hero.is-full {
+  aspect-ratio: 16 / 9;
+  /* soft shadow and hairline so the cream edge of the video reads against the white page */
+  box-shadow: var(--shadow-ring), 0 16px 48px -16px rgba(17, 17, 17, 0.28);
+}
+/* a head image on a transparent background sits straight on the page: no hairline, no shadow */
+.case-hero.is-bare { box-shadow: none; }
+.case-hero.is-video .case-hero-bg,
+.case-hero.is-full .case-hero-bg { display: none; }
+.case-hero.is-video .case-shot,
+.case-hero.is-full .case-shot {
+  left: 0; top: 0; width: 100%; height: 100%;
+  object-fit: cover;
+  border-radius: 0;
+  box-shadow: none;
+  transform: none;
+}
+
+/* A row of equal tiles (recordings): scrolls sideways on phones */
+.chapter-media.is-row {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(0, 1fr);
+  gap: 16px;
+  aspect-ratio: auto;
+  overflow: visible;
+  background: none;
+  box-shadow: none;
+}
+.chapter-media.is-row .placeholder {
+  position: static;
+  aspect-ratio: 16 / 10;
+}
+/* screenshots in the row keep their own proportions (about 1.54) */
+.chapter-media.is-row img {
+  position: static;
+  height: auto;
+  object-fit: cover;
+  aspect-ratio: 1.54;
+  border-radius: var(--r-md);
+  /* hairline ring plus a soft, low shadow */
+  box-shadow: var(--shadow-ring), 0 12px 28px -14px rgba(17, 17, 17, 0.2);
+}
+@media (max-width: 760px) {
+  .chapter-media.is-row {
+    grid-auto-columns: 80%;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    /* room inside the scroller so the shadow is not clipped; the margin keeps the tiles on the text edge */
+    padding: 4px 14px 28px;
+    margin: 0 -14px;
+    scroll-padding-inline: 14px;
+  }
+  .chapter-media.is-row .placeholder,
+  .chapter-media.is-row img { scroll-snap-align: start; }
+}
+.case-chapters.is-continued { margin-top: 132px; }
+.chapter-list.no-rule { border-bottom: 0; }
+/* no heading above the list: the first chapter starts clean, without a divider or top padding */
+.chapter-list.no-top-rule > .chapter:first-child { border-top: 0; padding-top: 0; }
+/* sub-sections follow their chapter in the list: in its column, no number, no divider */
+.chapter.has-subs { padding-bottom: 0; }
+.chapter.is-sub { border-top: 0; padding: 120px 0 0 80px; }
+.chapter.is-sub.is-last { padding-bottom: 132px; }
+.chapter.is-sub .chapter-head { grid-template-columns: minmax(0, 1fr); gap: 7.5px; }
+.chapter.is-sub .chapter-title { font-size: 22px; line-height: 1.2; }
+.chapter.is-sub .chapter-line { grid-column: 1; max-width: 64ch; font-size: 18px; color: var(--ink); }
+/* the first sub-section sits close under its chapter title */
+.chapter.has-subs + .chapter.is-sub { padding-top: 108px; }
+.chapter.is-title-only + .chapter.is-sub { padding-top: 0; margin-top: -10px; }
+.chapter.is-sub .chapter-body { padding: 16.5px 0 0; }
+/* full-width sub-sections: 50% more room between the heading and the image */
+.chapter.is-sub.is-full .chapter-body { padding-top: 25px; }
+.chapter.is-stats .chapter-body { grid-template-columns: minmax(0, 1fr); }
+@media (max-width: 760px) {
+  .chapter.is-sub { padding: 84px 0 0; }
+  .chapter.has-subs + .chapter.is-sub { padding-top: 75px; }
+  .chapter.is-title-only + .chapter.is-sub { padding-top: 0; margin-top: -6px; }
+}
+
+/* a clip in a chapter fills the tile at the clip's own proportions */
+.chapter-media.is-video { aspect-ratio: 960 / 536; }
+.chapter-media.is-video video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+
+/* A very wide strip of screens: shown large and scrolled sideways, so the detail stays readable */
+.chapter-media.is-scroll { overflow-x: auto; background: none; box-shadow: none; padding-bottom: 12px; }
+.chapter-media.is-scroll img { width: 3000px; max-width: none; border-radius: var(--r-md); }
+@media (max-width: 760px) { .chapter-media.is-scroll img { width: 2200px; } }
+
+/* media.full: the image spans the whole content width, under the title */
+.chapter.is-full .chapter-body { grid-template-columns: minmax(0, 1fr); }
+.chapter.is-full .chapter-text:empty { display: none; }
+.chapter.is-full .chapter-media:not(.is-video):not(.is-row):not(.is-composed):not(.is-phones):not(.is-strip) { aspect-ratio: 16 / 9; }
+@media (min-width: 761px) {
+  .chapter.is-sub.is-full .chapter-media { margin-left: -80px; }
+}
+
+.chapter-line strong { font-weight: 400; }
+
+/* a line set under the image: sits in the image column, at body-text size */
+.chapter-line.is-caption { grid-column: -2 / -1; font-size: 18px; line-height: 1.5; color: var(--muted); }
+
+/* row.stack: images one after the other, uncropped */
+.chapter-media.is-row.is-stack { grid-auto-flow: row; grid-auto-columns: minmax(0, 1fr); gap: 32px; overflow: visible; padding: 0; margin: 0; }
+.chapter-media.is-row.is-stack img { aspect-ratio: auto; object-fit: initial; }
+@media (min-width: 761px) {
+  .chapter.is-sub.is-full .chapter-media.is-row.is-stack { margin-left: -80px; }
+}
+
+/* ---------- Reveal on scroll (only when scripts/case.js turned it on) ---------- */
+.has-reveal .reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity .8s cubic-bezier(.2, .7, .2, 1), transform .8s cubic-bezier(.2, .7, .2, 1);
+}
+.has-reveal .reveal.is-in { opacity: 1; transform: none; }
+/* the image follows its text a beat later */
+.has-reveal .chapter-media.reveal { transition-delay: .12s; }
+@media (prefers-reduced-motion: reduce) {
+  .has-reveal .reveal { opacity: 1; transform: none; transition: none; }
+}
+
+/* a clip inside a laptop mockup: the picture is the laptop, the clip sits over its screen */
+.chapter-media.is-device { aspect-ratio: 1443 / 841; overflow: visible; background: none; box-shadow: none; }
+.chapter-media.is-device .device-frame {
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain;
+  filter: drop-shadow(0 18px 24px rgba(17, 17, 17, 0.16)) drop-shadow(0 2px 4px rgba(17, 17, 17, 0.08));
+}
+.chapter-media.is-device video {
+  /* measured from the laptop picture: the screen opening starts at (143, 8) of 1443 x 841, with a 26px inner corner */
+  inset: auto; left: 9.91%; top: 0.95%; width: 80.1%; height: 89.06%;
+  border-radius: 2.25% 2.25% 0 0 / 3.46% 3.46% 0 0; object-fit: cover; object-position: top;
+}
+
+/* sub-section paragraphs with an image under them share one narrow measure (text-only ones spread across the page) */
+.chapter.is-sub:not(.is-split) .chapter-text { max-width: 44ch; }
+
+/* a phone screen: kept at about its own width instead of stretching across the page */
+.chapter-media.is-narrow { max-width: 375px; }
+
+.chapter-points strong { font-weight: 600; }
+
+/* a phone beside the text: the text sits halfway down the phone instead of level with its top (stacked again on phones) */
+@media (min-width: 761px) {
+  .chapter.has-phone .chapter-body { align-items: center; column-gap: 96px; }
+}
+/* the heading lives in the text column here, so the body starts at the top of the chapter */
+.chapter.has-phone .chapter-body { padding-top: 0; }
+.chapter.has-phone .chapter-title { margin-bottom: 16.5px; }
+
+/* a phone mockup: the screen image sits over the display of the phone picture */
+.chapter-media.is-phone { aspect-ratio: 293 / 616; max-width: 320px; overflow: visible; background: none; box-shadow: none; }
+.chapter-media.is-phone .phone-frame {
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain;
+  filter: drop-shadow(0 18px 24px rgba(17, 17, 17, 0.16)) drop-shadow(0 2px 4px rgba(17, 17, 17, 0.08));
+}
+.chapter-media.is-phone .phone-screen {
+  position: absolute; inset: auto; left: 2.05%; top: 1.3%; width: 95.56%; height: 97.4%;
+  object-fit: cover; object-position: top; border-radius: 9.6% / 4.5%; /* the phone picture's screen opening has a 27px inner corner */
+}
+
+/* a row of phone mockups: scrolls sideways, each phone keeps its own size */
+.chapter-media.is-phones {
+  display: flex; gap: 38.4px; aspect-ratio: auto; background: none; box-shadow: none; border-radius: 0;
+  overflow-x: auto; overflow-y: hidden; scroll-snap-type: x proximity;
+  padding: 4px 4px 40px;
+}
+.chapter-media.is-phones .phone-mock { position: relative; flex: 0 0 300px; aspect-ratio: 293 / 616; scroll-snap-align: start; }
+.chapter-media.is-phones .phone-frame {
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain;
+  filter: drop-shadow(0 18px 24px rgba(17, 17, 17, 0.16)) drop-shadow(0 2px 4px rgba(17, 17, 17, 0.08));
+}
+.chapter-media.is-phones .phone-screen {
+  position: absolute; inset: auto; left: 2.05%; top: 1.3%; width: 95.56%; height: 97.4%;
+  object-fit: cover; object-position: top; border-radius: 9.6% / 4.5%; /* the phone picture's screen opening has a 27px inner corner */
+}
+
+/* the phone row is as wide as the space from its left edge to the window edge (set in scripts/case.js) */
+.chapter-media.is-phones { max-width: none; justify-self: start; padding-right: var(--gutter); }
+
+/* room around the phones so their soft shadows fade out inside the scroller instead of ending in a hard edge;
+   the negative margins keep the first phone lined up with the other images */
+.chapter.is-sub.is-full .chapter-media.is-phones { padding: 24px var(--gutter) 72px 32px; margin: -24px 0 -32px -32px; }
+@media (min-width: 761px) {
+  .chapter.is-sub.is-full .chapter-media.is-phones { margin-left: -112px; }
+}
+.chapter.is-sub.is-full .chapter-media.is-phones { scroll-padding-left: 32px; }
+
+/* the quotations themselves are set in italics (the big opening mark stays upright) */
+.chapter-points.is-quotes li { font-style: italic; }
+.chapter-points.is-quotes .quote-mark { font-style: normal; }
+
+/* the row is moved by the page scroll, so it does not snap to the phones */
+.chapter-media.is-phones { scroll-snap-type: none; }
+
+/* the numbers sit as far below their heading as the next section sits below the numbers */
+@media (min-width: 761px) {
+  .chapter.is-sub.is-stats .chapter-body { padding-top: 43px; }
+}
+
+/* ---------- Minuteful for Wound redesign ---------- */
+/* a long project name is set smaller so it stays on one line */
+.case-title h1.is-long { font-size: clamp(40px, 5.4vw, 78px); line-height: 0.9; }
+
+/* a large centred sentence between chapters */
+.chapter-statement {
+  margin: 0 auto;
+  /* the chapter above adds 132px below it and the one after adds 84px above it, so the space on both sides comes to 200px */
+  padding: 68px 0 116px;
+  max-width: 838px;
+  text-align: center;
+  font-size: 36px;
+  line-height: 1.18;
+}
+@media (max-width: 760px) { .chapter-statement { font-size: 26px; padding: 8px 0 56px; } }
+
+/* images in a row keep their own proportions */
+.chapter-media.is-row.is-natural { align-items: start; }
+.chapter-media.is-row.is-natural img { aspect-ratio: auto; object-fit: initial; height: auto; }
+
+/* an image with its own backdrop and shadows: no white card, ring or crop */
+.chapter-media.is-composed.is-bare { background: none; box-shadow: none; border-radius: 0; overflow: visible; }
+
+/* screens side by side at their own size, scrolling sideways */
+.chapter-media.is-strip {
+  display: flex;
+  gap: 45px;
+  aspect-ratio: auto;
+  background: none;
+  box-shadow: none;
+  border-radius: 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 0 0 40px 80px;
+}
+.chapter-media.is-strip img {
+  position: static;
+  flex: 0 0 auto;
+  width: 810px;
+  max-width: none;
+  height: auto;
+  border-radius: var(--r-sm);
+  box-shadow: var(--shadow-ring), 0 12px 28px -14px rgba(17, 17, 17, 0.2);
+}
+@media (max-width: 760px) {
+  .chapter-media.is-strip { padding-left: 0; gap: 20px; }
+  .chapter-media.is-strip img { width: 82%; }
+}
+
+/* a small detail picture under the text */
+.chapter-thumb { display: block; width: 274px; max-width: none; margin: 8px 0 0 -28px; }
+
+/* the phone row slides with the page scroll, so its own scrollbar is hidden */
+.chapter-media.is-phones { scrollbar-width: none; -ms-overflow-style: none; }
+.chapter-media.is-phones::-webkit-scrollbar { display: none; }
+
+/* a full-width sub-section whose only text is its heading line (the laptop clip): 50% more room above the image */
+.chapter.is-sub.is-full:has(.chapter-text:empty) .chapter-body { padding-top: 37.5px; }
+
+/* more room (about 30%) between the phone above and the row of phone screens */
+@media (min-width: 761px) {
+  .chapter.is-sub:has(.chapter-media.is-phones) { padding-top: 166px; }
+}
+
+/* no divider between a centred statement and the chapter that follows it */
+.chapter-statement + .chapter { border-top: 0; }
+
+/* a bare image must fit its column (without the card it is no longer clipped, so it overflowed to the right) */
+.chapter-media.is-composed.is-bare img { width: 100%; max-width: 100%; }
+/* the centred statement is exactly centred on the page content */
+.chapter-statement { box-sizing: border-box; width: min(100%, 838px); margin-left: auto; margin-right: auto; }
+
+/* the strip of screens runs edge to edge (the left edge is set in scripts/case.js) and has no scrollbar of its own */
+.chapter-media.is-strip { max-width: none; justify-self: start; padding-right: var(--gutter); scrollbar-width: none; -ms-overflow-style: none; }
+.chapter-media.is-strip::-webkit-scrollbar { display: none; }
+
+/* the strip is as tall as its screens, never a fixed 16:9 box that crops them */
+.chapter-media.is-strip { aspect-ratio: auto; height: auto; }
+
+/* the strip is moved by the page scroll (scripts/case.js), so it does not snap */
+.chapter-media.is-strip { scroll-snap-type: none; }
+
+/* the strip sits in a wrapper that runs edge to edge, with an arrow on each side */
+.strip-wrap { position: relative; max-width: none; justify-self: start; min-width: 0; }
+@media (min-width: 761px) { .strip-wrap { margin-left: -80px; } }
+.chapter.is-sub.is-full .strip-wrap .chapter-media.is-strip { margin-left: 0; width: 100%; }
+.strip-arrow {
+  position: absolute;
+  top: var(--arrow-top, calc(50% - 20px));
+  transform: translateY(-50%);
+  width: 56px; height: 56px;
+  display: grid; place-items: center;
+  border: 0; border-radius: 50%;
+  background: rgba(232, 228, 223, 0.92);
+  color: var(--ink);
+  cursor: pointer;
+  box-shadow: var(--shadow-ring), 0 8px 24px -8px rgba(17, 17, 17, 0.28);
+  transition: background .2s ease, transform .2s ease;
+  z-index: 2;
+}
+.strip-arrow:disabled { opacity: 0.4; cursor: default; box-shadow: var(--shadow-ring); }
+.strip-arrow:disabled:hover { background: rgba(232, 228, 223, 0.92); transform: translateY(-50%); }
+.strip-arrow:hover { background: rgb(222, 217, 211); transform: translateY(-50%) scale(1.06); }
+.strip-arrow:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.strip-arrow.is-next { right: 28px; }
+.strip-arrow.is-back { right: 96px; }
+@media (max-width: 760px) { .strip-arrow { width: 44px; height: 44px; } .strip-arrow.is-next { right: 12px; } .strip-arrow.is-back { right: 64px; } }
+
+/* a sub-section opened by a line alone is set at the subtitle size (22px), like the line under a chapter title */
+.chapter.is-sub:not(:has(.chapter-title)) .chapter-line { font-size: 22px; line-height: 1.2; }
+
+/* the arrows hang below the line above the strip, so the strip sits lower: twice the space between the arrows and the screens */
+.chapter.is-sub.is-full:has(.chapter-media.is-strip) .chapter-body { padding-top: 60px; }
+
+/* annotated diagram: the notes are transparent layers on top of the diagram and appear one after the other while scrolling */
+.annot { position: relative; }
+.chapter-media .annot img { position: static; display: block; width: 100%; height: auto; }
+.chapter-media .annot .annot-layer {
+  position: absolute; inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateX(-18px);
+  transition: opacity .6s ease, transform .7s var(--ease-out);
+}
+.chapter-media .annot .annot-layer.is-on { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) { .chapter-media .annot .annot-layer { transition: none; transform: none; } }
+
+/* ---------- Pinned scene (The verdict > Capabilities breakdown) ---------- */
+/* the scene is tall; its stage sticks to the screen while that height scrolls past */
+.chapter.is-scene { padding-top: 120px; }
+/* the gap above the scene is its own padding plus the space left above its centred content; pull it up by 75% of that */
+.scene { position: relative; height: 260vh; margin-top: calc(-0.75 * (120px + max(0px, (100vh - 780px) / 2))); }
+.scene-stick {
+  position: sticky; top: 0;
+  height: 100vh;
+  display: grid;
+  grid-template-columns: minmax(0, 486px) minmax(0, 1fr);
+  gap: 48px;
+  align-items: center;
+}
+.scene-left { display: flex; flex-direction: column; gap: 32px; min-width: 0; }
+.scene-copy { display: grid; }
+.scene-step { grid-area: 1 / 1; will-change: opacity, transform; }
+.scene-step .chapter-title { margin: 0 0 16.5px; font-size: 22px; line-height: 1.2; }
+.scene-text { margin: 0; max-width: 44ch; font-size: 18px; line-height: 1.65; color: var(--ink); }
+/* the small page, with a frame that slides down it */
+.scene-thumb {
+  --th: clamp(220px, calc(100vh - 500px), 399px);
+  position: relative;
+  height: var(--th);
+  width: calc(var(--th) * 218 / 399);
+  border-radius: 8px;
+  box-shadow: var(--shadow-ring), 0 16px 32px -14px rgba(17, 17, 17, 0.28);
+}
+.scene-thumb img { display: block; width: 100%; height: 100%; object-fit: cover; border-radius: 8px; }
+.scene-frame {
+  position: absolute; left: 0; right: 0; top: 0; height: 51%;
+  box-sizing: border-box;
+  border: 1.5px solid #0e6869;
+  border-radius: 8px;
+  pointer-events: none;
+}
+.scene-media { display: grid; min-width: 0; align-items: center; }
+.scene-shot {
+  grid-area: 1 / 1;
+  width: 100%;
+  max-height: calc(100vh - 96px);
+  object-fit: contain;
+  object-position: left center;
+  will-change: opacity;
+}
+/* phones and reduced motion: no pinning, the two steps simply follow each other */
+.scene.is-static { height: auto; }
+.scene.is-static .scene-stick { position: static; height: auto; display: block; }
+.scene.is-static .scene-copy { display: block; }
+.scene.is-static .scene-step { margin-bottom: 32px; }
+.scene.is-static .scene-thumb { display: none; }
+.scene.is-static .scene-media { display: block; }
+.scene.is-static .scene-shot { display: block; max-height: none; margin-bottom: 32px; }
+
+/* Image with looping GIFs laid over it (the Task 3 onboarding modals) */
+.overlay-wrap { position: relative; line-height: 0; }
+.chapter-media.is-composed .overlay-wrap > img:first-child { display: block; width: 100%; height: auto; }
+.chapter-media.is-composed .overlay-wrap > img.overlay-gif { position: absolute; inset: auto; display: block; max-width: none; margin: 0; border-radius: 0; box-shadow: none; }

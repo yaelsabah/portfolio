@@ -1,0 +1,47 @@
+/* Cosmos direction: design tokens.
+   Change the look here; every other file reads these variables. */
+:root {
+  /* colour */
+  --ground: #F7F5F3;        /* page background */
+  --surface: #EDE9E4;       /* chips, placeholders, soft fills */
+  --ink: #111111;           /* text and solid buttons */
+  --muted: #69655E;         /* secondary text (4.5:1 on ground) */
+  --line: #E0DBD5;          /* hairlines and dividers */
+  --accent: #111111;        /* links on hover, focus ring */
+  --dim: #000000;           /* overlay on cards that sink back */
+
+  /* glass and blur */
+  --header-bg: rgba(247, 245, 243, 0.6);
+  --cap-bg: rgba(255, 255, 255, 0.5);
+  --blur: blur(24px) saturate(1.5);
+
+  /* shadows */
+  --shadow-ring: 0 0 0 1px rgba(17, 17, 17, 0.06);
+  --shadow-float: 0 30px 80px -30px rgba(17, 17, 17, 0.35);
+  --shadow-lift: 0 40px 90px -30px rgba(17, 17, 17, 0.45);
+
+  /* corner radius */
+  --r-sm: 12px;
+  --r-md: 18px;
+  --r-lg: 26px;
+  --r-xl: 34px;
+  --r-pill: 999px;
+
+  /* type */
+  --font-display: 'Instrument Sans', 'Helvetica Neue', Arial, sans-serif;
+  --font-body: 'Instrument Sans', 'Helvetica Neue', Arial, sans-serif;
+  --font-serif: 'Instrument Serif', Georgia, 'Times New Roman', serif;  /* the quote marks in case studies */
+  --display-weight: 500;
+  --display-tracking: -0.035em;
+
+  /* layout */
+  --page-max: 1376px;
+  --gutter: 48px;
+
+  /* motion */
+  --ease-out: cubic-bezier(.2, .8, .2, 1);
+}
+
+@media (max-width: 700px) {
+  :root { --gutter: 20px; }
+}
