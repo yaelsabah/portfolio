@@ -166,7 +166,7 @@ window.PROJECTS = [
         lineBelow: true,
         sections: [
           { media: { src: 'assets/images/checklist/flywheel.png', wide: true, bare: true,
-                     alt: 'The Value Moments flywheel: a loop of three steps. 1, Acquire data: help users easily add more data to their tree, driven by Educate and Teach. 2, Compute: use the user’s data and MyHeritage data to create quality matches, handled by MyHeritage. 3, Utilize: help users use and benefit from MyHeritage data, driven by Guide and Direct. MyHeritage’s matching engine handles Compute; our job was to move the two steps users own.' } },
+                     alt: 'The Value Moments flywheel, a loop that compounds, in three steps. 1, Acquire data: help users easily add more data to their tree. 2, Compute: use the user’s data and MyHeritage data to create quality matches and other objects. 3, Utilize: help users use and benefit from MyHeritage data. MyHeritage’s matching engine handles Compute; our job was to move the two steps users own: Acquire and Utilize.' } },
           { title: 'Four ideas to get the wheel turning',
             boldLead: true,
             points: [{ text: 'Educate. Show users that the more they add, relatives and facts, the more valuable matches they get.', tag: 'Drives step 1 · Acquire data' },
