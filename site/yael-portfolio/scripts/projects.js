@@ -179,10 +179,10 @@ window.PROJECTS = [
         sections: [
           { title: 'Little wins, from the first second',
             body: ['When users open the Checklist, they’ve already made progress. “Start your family tree” is checked off from Magic 7, so they start at 1/4, not zero, and a burst of confetti marks the win. The next task, adding relatives, continues what they were just doing, so the next check mark comes quickly.'],
-            media: { src: 'assets/images/checklist/little-wins.jpg', wide: true, alt: 'The MyHeritage family tree with the “Family tree checklist” entry point in the corner, at 0 of 4 steps' } },
+            media: { video: 'assets/video/checklist/little-wins.mp4', src: 'assets/images/checklist/little-wins.jpg', wide: true, aspect: '2528 / 1366', alt: 'The MyHeritage family tree with the “Family tree checklist” entry point in the corner, at 0 of 4 steps' } },
           { title: 'Visible progress that pulls you forward',
             body: ['Every relative added earns a +1, and the step’s ring fills as users get closer. Each finished step turns green and fills a segment of the bar, and the closer users get to done, the stronger the pull to finish. Branch Builder™ adds many relatives in one click: a big jump for little effort.'],
-            media: { src: 'assets/images/checklist/visible-progress.jpg', wide: true, alt: 'The family tree with the Checklist entry point showing 1 of 4 steps done and the first segment of the progress bar filled in green' } },
+            media: { video: 'assets/video/checklist/visible-progress.mp4', src: 'assets/images/checklist/visible-progress.jpg', wide: true, aspect: '2528 / 1366', alt: 'The family tree with the Checklist entry point showing 1 of 4 steps done and the first segment of the progress bar filled in green' } },
           { title: 'Certainty: always know what to do next',
             body: ['Each step has one clear action, and the “Family tree checklist” entry point stays in the tree so users can always come back to it. “What are matches?” opens a short explainer, and when nothing is ready yet, the Checklist says so honestly: “No matches found yet. Try adding a few more relatives, birth dates, or death dates.”'],
             media: { src: 'assets/images/checklist/matches-modals.png', wide: true, bare: true,
@@ -195,8 +195,8 @@ window.PROJECTS = [
           { title: 'Incentive: a clear reward at the end',
             body: ['The header names both the user and the reward: “Laura, complete these steps to increase your chances of receiving discoveries.” The last step waits until there’s something to show, then unlocks with a “12 matches found” badge and a glowing Review button. And as the tree grows, an “Excellent!” moment celebrates the progress and invites users to keep going.'],
             media: { row: { stack: true, natural: true, images: [
-              { src: 'assets/images/checklist/incentive-checklist.jpg', alt: 'The open Checklist: “Laura, complete these steps to increase your chances of receiving discoveries”, 3 of 4 steps completed, with Review your matches still waiting for matches' },
-              { src: 'assets/images/checklist/incentive-tree.jpg', alt: 'The family tree grown to 14 people across four generations' }
+              { video: 'assets/video/checklist/incentive-checklist.mp4', src: 'assets/images/checklist/incentive-checklist.jpg', alt: 'The open Checklist: “Laura, complete these steps to increase your chances of receiving discoveries”, 3 of 4 steps completed, with Review your matches still waiting for matches' },
+              { video: 'assets/video/checklist/incentive-tree.mp4', src: 'assets/images/checklist/incentive-tree.jpg', alt: 'The family tree grown to 14 people across four generations' }
             ] } } },
           { title: 'What we expected',
             boldLead: true,

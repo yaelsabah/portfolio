@@ -483,6 +483,16 @@
 /* images in a row keep their own proportions */
 .chapter-media.is-row.is-natural { align-items: start; }
 .chapter-media.is-row.is-natural img { aspect-ratio: auto; object-fit: initial; height: auto; }
+/* screen recordings in a row: full width at their own proportions, with the same card corners and shadow as single clips */
+.chapter-media.is-row video {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--r-lg);
+  background: var(--surface);
+  box-shadow: var(--shadow-ring), 0 12px 28px -14px rgba(17, 17, 17, 0.2);
+}
+.chapter-media.is-row.is-stack { gap: 48px; }
 
 /* an image with its own backdrop and shadows: no white card, ring or crop */
 .chapter-media.is-composed.is-bare { background: none; box-shadow: none; border-radius: 0; overflow: visible; }

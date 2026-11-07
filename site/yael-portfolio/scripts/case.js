@@ -248,11 +248,22 @@
       if (c.media.row.natural) media.classList.add('is-natural');
       if (c.media.row.images) {
         c.media.row.images.forEach((im) => {
-          const img = document.createElement('img');
-          img.src = im.src;
-          img.alt = im.alt || '';
-          img.loading = 'lazy';
-          img.decoding = 'async';
+          let img;
+          if (im.video) {
+            // a silent looping screen recording; src is its poster until it loads
+            img = document.createElement('video');
+            img.src = im.video;
+            if (im.src) img.poster = im.src;
+            img.muted = true; img.loop = true; img.autoplay = true; img.playsInline = true;
+            img.preload = 'metadata';
+            img.setAttribute('aria-label', im.alt || '');
+          } else {
+            img = document.createElement('img');
+            img.src = im.src;
+            img.alt = im.alt || '';
+            img.loading = 'lazy';
+            img.decoding = 'async';
+          }
           media.append(img);
         });
       } else {
@@ -306,6 +317,9 @@
     } else if (c.media.video && !c.media.phone) {
       // a silent looping clip, e.g. a screen recording
       media.classList.add('is-video');
+      // wide: the clip runs under the text, across the column; aspect: the clip's own proportions
+      if (c.media.wide) node.querySelector('.chapter').classList.add('is-wide');
+      if (c.media.aspect) media.style.aspectRatio = c.media.aspect;
       if (c.media.frame) {
         // frame: the clip plays inside a device mockup, laid over the screen of this picture
         media.classList.add('is-device');
@@ -317,6 +331,7 @@
       }
       const v = document.createElement('video');
       v.src = c.media.video;
+      if (c.media.src) v.poster = c.media.src;
       v.muted = true; v.loop = true; v.autoplay = true; v.playsInline = true;
       v.setAttribute('aria-label', c.media.alt || '');
       media.append(v);
