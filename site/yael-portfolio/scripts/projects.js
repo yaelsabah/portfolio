@@ -138,7 +138,7 @@ window.PROJECTS = [
         sections: [
           { title: 'The funnel',
             body: ['In the last 30 days, 391.4K people registered through the family tree. 197.4K started Magic 7, 98.1K finished it, and only 28.8K added a relative on their own afterwards.'],
-            media: { src: 'assets/images/checklist/funnel.png', wide: true, bare: true, alt: 'A bar chart of the family tree funnel over the last 30 days: 391.4K registered, 197.4K (50.43%) started Magic 7, 98.11K (25.07%) completed it, and 28.81K (7.36%) added an individual manually. Overall, 7.36% of registrants reach step 4.' } },
+            media: { src: 'assets/images/checklist/funnel-v2.png', wide: true, bare: true, alt: 'A bar chart of the family tree funnel over the last 30 days: 391.4K registered, 197.4K (50.43%) started Magic 7, 98.11K (25.07%) completed it, and 28.81K (7.36%) added an individual manually. Overall, 7.36% of registrants reach step 4.' } },
           { title: 'What the numbers say',
             stats: [
               { number: '50%', text: 'of users who start Magic 7 finish it. The other half never reach their first moment of value.' },
@@ -165,7 +165,7 @@ window.PROJECTS = [
         line: 'If users get valuable matches early, they’ll add more to their tree, and a bigger tree brings even more matches. We called this loop the ‘Value Moments’ flywheel.',
         lineBelow: true,
         sections: [
-          { media: { src: 'assets/images/checklist/flywheel.png', wide: true, bare: true,
+          { media: { src: 'assets/images/checklist/flywheel-v2.png', wide: true, bare: true,
                      alt: 'The Value Moments flywheel, a loop that compounds, in three steps. 1, Acquire data: help users easily add more data to their tree. 2, Compute: use the user’s data and MyHeritage data to create quality matches and other objects. 3, Utilize: help users use and benefit from MyHeritage data. MyHeritage’s matching engine handles Compute; our job was to move the two steps users own: Acquire and Utilize.' } },
           { title: 'Four ideas to get the wheel turning',
             boldLead: true,
