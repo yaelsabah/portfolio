@@ -9,6 +9,7 @@
   --line: #E0DBD5;          /* hairlines and dividers */
   --accent: #111111;        /* links on hover, focus ring */
   --dim: #000000;           /* overlay on cards that sink back */
+  --signal: #B83A24;        /* small labels in case studies, e.g. which flywheel step an idea drives */
 
   /* glass and blur */
   --header-bg: rgba(247, 245, 243, 0.6);

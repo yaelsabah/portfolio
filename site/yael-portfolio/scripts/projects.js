@@ -108,6 +108,7 @@ window.PROJECTS = [
   {
     slug: 'checklist',
     name: 'The Checklist',
+    titleSize: 'clamp(56px, 7.6vw, 110px)',
     outcome: 'A guided checklist that shows new users what to do next, so they keep growing their family tree and reach their first valuable match.',
     role: 'Product designer',
     industry: 'B2C',
@@ -126,27 +127,28 @@ window.PROJECTS = [
     chaptersTitle: false,
     team: false,
     impactSection: false,
-    lead: 'Only about 3 in 10 people who finish onboarding go on to add anyone to their tree. The Checklist shows them what to do next.',
-    // Story follows the Checklist case study in Figma (Checklist file, Case study / The Checklist).
+    lead: 'Only 3 in 10 people who finish onboarding go on to add another relative. The Checklist shows them what to do next.',
+    // Story follows the Checklist case study in Figma (Case studies file, Case study / The Checklist – edited).
     chapters: [
       { title: 'The problem',
-        line: 'People sign up for the family tree, but few keep building it.',
+        line: 'People sign up to build a family tree, but most stop after the first few relatives.',
         lineBelow: true,
-        body: ['Family tree users start with Magic 7, the onboarding where they add their first relatives. Half of the people who register never start it, only half of those who start finish it, and about 30% of those who finish go on to add individuals manually.',
-               'That matters because matches are what make MyHeritage worth coming back to, and matches come from the information users add. Without more relatives and facts there are no valuable matches, and without matches there is little reason to continue.'],
+        body: ['New family tree users start with Magic 7, the onboarding flow where they add their first relatives. Half of the people who register never start it. Half of those who start never finish. And of those who finish, only about 30% go on to add anyone else on their own.',
+               'That matters because matches are why people come back to MyHeritage, and matches are built from what users add. Fewer relatives and facts means fewer valuable matches, and without matches there is little reason to return.'],
         sections: [
           { title: 'The funnel',
-            body: ['In the last 30 days, 391.4K people registered through the family tree. 197.4K started Magic 7, 98.1K completed it, and 28.8K added an individual manually afterwards.'],
-            media: { src: 'assets/images/checklist/funnel.png', wide: true, bare: true, alt: 'A funnel chart of the last 30 days for the family tree: 391.4K registered, 197.4K (50.43%) started Magic 7, 98.11K (49.7% of those) completed it, and 28.81K (29.36% of those) added an individual manually. Overall, 7.36% of registrants reach the last step.' } },
+            body: ['In the last 30 days, 391.4K people registered through the family tree. 197.4K started Magic 7, 98.1K finished it, and only 28.8K added a relative on their own afterwards.'],
+            media: { src: 'assets/images/checklist/funnel.png', wide: true, bare: true, alt: 'A bar chart of the family tree funnel over the last 30 days: 391.4K registered, 197.4K (50.43%) started Magic 7, 98.11K (25.07%) completed it, and 28.81K (7.36%) added an individual manually. Overall, 7.36% of registrants reach step 4.' } },
           { title: 'What the numbers say',
             stats: [
-              { number: '30%', text: 'of users who complete Magic 7 go on to add individuals manually.' },
-              { number: '50%', text: 'of users who start Magic 7 finish it, so half never reach the first moment of value.' },
-              { number: '54%', text: 'of users who completed Magic 7 have fewer than 8 individuals in their tree.' }
+              { number: '50%', text: 'of users who start Magic 7 finish it. The other half never reach their first moment of value.' },
+              { number: '30%', text: 'of users who finish Magic 7 go on to add relatives on their own.' },
+              { number: '54%', text: 'of users who finish Magic 7 have fewer than 8 people in their tree.' }
             ] }
         ] },
       { title: 'The research',
-        line: 'We conducted a survey to users who signed up and completed Magic 7 in the past 2 months',
+        subGap: 80,
+        line: 'We surveyed users who signed up and finished Magic 7 in the past two months, to learn why they stopped.',
         lineBelow: true,
         sections: [
           { title: 'In their own words',
@@ -155,37 +157,47 @@ window.PROJECTS = [
                      '“I don’t know the exact names or details of additional relatives, and I wasn’t sure how to add them.”',
                      '“It felt overwhelming or complex”'] },
           { title: 'Key pain points',
-            points: ['Unclear how matches are generated, so the value of adding facts is unclear too.',
+            points: ['Unclear how matches are made, so it’s unclear why adding facts is worth it.',
                      'Hesitation to add incomplete details or living relatives.',
                      'Frustration with matches that come late, or not at all.'] }
         ] },
       { title: 'The hypothesis',
-        body: ['If users get more, or any, valuable matches, they will add more information, and that brings them more matches. Our job was to get that loop turning, with four ideas to test:'],
-        sections: [
-          { boldLead: true,
-            points: ['Educate. Show users that the more information they add, facts and relatives, the more valuable matches they get.',
-                     'Teach. Show users how to add more individuals and facts, so that more of them do it.',
-                     'Guide. Show users where to find their matches and how the types differ (Record Matches, Smart Matches and Instant Discoveries), so that more of them engage with matches.',
-                     'Direct. Show users what to do next, and how it connects to getting valuable matches.'] }
-        ] },
-      { title: 'The Checklist',
-        line: 'A guided, personalized experience after Magic 7.',
+        line: 'If users get valuable matches early, they’ll add more to their tree, and a bigger tree brings even more matches. We called this loop the ‘Value Moments’ flywheel.',
         lineBelow: true,
-        body: ['The Checklist sits in the family tree and shows each user exactly what to do next to reach their first meaningful match, in small steps with visible progress.'],
         sections: [
-          { title: 'Task 1: Add three more individuals',
-            body: ['We must not break the momentum of users adding relatives in their first session'] },
-          { title: 'Task 2: Run Branch Builder',
-            body: ['Trigger the Branch Builder widget'] },
-          { title: 'Task 3: Review your matches',
-            body: ['Send users to the Matches by people page for instant discovery.'],
+          { media: { src: 'assets/images/checklist/flywheel.png', wide: true, bare: true,
+                     alt: 'The Value Moments flywheel: a loop of three steps. 1, Acquire data: help users easily add more data to their tree, driven by Educate and Teach. 2, Compute: use the user’s data and MyHeritage data to create quality matches, handled by MyHeritage. 3, Utilize: help users use and benefit from MyHeritage data, driven by Guide and Direct. MyHeritage’s matching engine handles Compute; our job was to move the two steps users own.' } },
+          { title: 'Four ideas to get the wheel turning',
+            boldLead: true,
+            points: [{ text: 'Educate. Show users that the more they add, relatives and facts, the more valuable matches they get.', tag: 'Drives step 1 · Acquire data' },
+                     { text: 'Teach. Show users how to add individuals and facts, so more of them do it.', tag: 'Drives step 1 · Acquire data' },
+                     { text: 'Guide. Show users where their matches are and how Record Matches, Smart Matches and Instant Discoveries differ.', tag: 'Drives step 3 · Utilize' },
+                     { text: 'Direct. Show users what to do next and how it leads to valuable matches.', tag: 'Closes the loop · back to step 1' }] }
+        ] },
+      { title: 'The Checklist: four guided steps to a first match',
+        subGap: 55,
+        sections: [
+          { title: 'Little wins, from the first second',
+            body: ['When users open the Checklist, they’ve already made progress. “Start your family tree” is checked off from Magic 7, so they start at 1/4, not zero, and a burst of confetti marks the win. The next task, adding relatives, continues what they were just doing, so the next check mark comes quickly.'],
+            media: { src: 'assets/images/checklist/little-wins.jpg', wide: true, alt: 'The MyHeritage family tree with the “Family tree checklist” entry point in the corner, at 0 of 4 steps' } },
+          { title: 'Visible progress that pulls you forward',
+            body: ['Every relative added earns a +1, and the step’s ring fills as users get closer. Each finished step turns green and fills a segment of the bar, and the closer users get to done, the stronger the pull to finish. Branch Builder™ adds many relatives in one click: a big jump for little effort.'],
+            media: { src: 'assets/images/checklist/visible-progress.jpg', wide: true, alt: 'The family tree with the Checklist entry point showing 1 of 4 steps done and the first segment of the progress bar filled in green' } },
+          { title: 'Certainty: always know what to do next',
+            body: ['Each step has one clear action, and the “Family tree checklist” entry point stays in the tree so users can always come back to it. “What are matches?” opens a short explainer, and when nothing is ready yet, the Checklist says so honestly: “No matches found yet. Try adding a few more relatives, birth dates, or death dates.”'],
             media: { src: 'assets/images/checklist/matches-modals.png', wide: true, bare: true,
-                     alt: 'Three onboarding modals explain Smart Matches, Record Matches and Instant Discoveries, each with a short looping animation.',
+                     alt: 'Three explainer modals: What are Smart Matches™, What are Record Matches, and What are Instant Discoveries™, each with a short looping animation.',
                      overlays: [
                           { src: 'assets/images/checklist/modal-smart-matches.gif', x: 4.345, y: 42.884, w: 27.798, h: 26.248 },
                           { src: 'assets/images/checklist/modal-record-matches.gif', x: 36.131, y: 42.884, w: 27.798, h: 26.248 },
                           { src: 'assets/images/checklist/modal-instant-discoveries.gif', x: 67.917, y: 43.438, w: 27.798, h: 26.248 }
                      ] } },
+          { title: 'Incentive: a clear reward at the end',
+            body: ['The header names both the user and the reward: “Laura, complete these steps to increase your chances of receiving discoveries.” The last step waits until there’s something to show, then unlocks with a “12 matches found” badge and a glowing Review button. And as the tree grows, an “Excellent!” moment celebrates the progress and invites users to keep going.'],
+            media: { row: { stack: true, natural: true, images: [
+              { src: 'assets/images/checklist/incentive-checklist.jpg', alt: 'The open Checklist: “Laura, complete these steps to increase your chances of receiving discoveries”, 3 of 4 steps completed, with Review your matches still waiting for matches' },
+              { src: 'assets/images/checklist/incentive-tree.jpg', alt: 'The family tree grown to 14 people across four generations' }
+            ] } } },
           { title: 'What we expected',
             boldLead: true,
             points: ['Proactivity. More users reach activation by getting familiar with the product and actively growing their tree.',
@@ -195,18 +207,18 @@ window.PROJECTS = [
       { title: 'The A/B test',
         line: 'Does a checklist after Magic 7 help people keep growing their tree?',
         lineBelow: true,
-        body: ['The data showed that 70% of users stop adding relatives manually after Magic 7. Many see onboarding as finished, and don’t realize their tree has to keep growing to unlock meaningful discoveries. Many also skip the first walkthrough, and stay unsure how to do the core things in the family tree.',
-               'The Checklist is meant to close that activation gap: it teaches users what to do, and gives clear, timely guidance on the next high-value step.'],
+        body: ['Our data showed that 70% of users stop adding relatives after Magic 7. Many see onboarding as finished and don’t realize their tree needs to keep growing to unlock meaningful discoveries. Many also skip the first walkthrough and aren’t sure how to do the basics in the family tree.',
+               'The Checklist was designed to close that gap: it teaches users what to do, and gives clear, timely guidance on the next most valuable step.'],
         sections: [
           { title: 'What we measured',
             boldLead: true,
             points: ['Activation after Magic 7. The share of users who add at least one relative once Magic 7 is done.',
                      'More matches. The share of users who get at least one Smart Match, Record Match or Instant Discovery.',
                      'Engagement with matches. Users viewing, confirming or rejecting the matches they get.',
-                     'Billing. Conversion rate and net billing, with checklist adoption (one task, two tasks, or all of them), drop-off per task and the activity score tracked alongside.'] }
+                     'Billing. Conversion rate and net billing, tracked alongside checklist adoption (one task, two, or all), drop-off per task, and activity score.'] }
         ] },
       { title: 'The results',
-        line: 'The Checklist worked',
+        line: 'More people kept building their tree',
         lineBelow: true,
         sections: [
           { stats: [
@@ -218,7 +230,7 @@ window.PROJECTS = [
       { title: 'What users told us',
         line: 'We surveyed 76 people per variant, to understand what in the Checklist could explain their behavior.',
         lineBelow: true,
-        body: ['The Checklist itself is clear: most users understood its parts, including the progress bar and the tasks. Onboarding also felt clearer, with a 2% lift in “better than expected” and a 5% lift in knowing what to do next.'],
+        body: ['The Checklist itself was clear: most users understood its parts, including the progress bar and the tasks. Onboarding felt clearer too, with a 2% lift in users rating it “better than expected”.'],
         sections: [
           { title: 'What the survey showed',
             stats: [
@@ -228,9 +240,9 @@ window.PROJECTS = [
             ] }
         ] },
       { title: 'What we decided',
-        line: 'Roll out and keep testing where it is unclear, and go back where it does not help.',
+        line: 'Roll it out, keep testing what’s still unclear, and pull back what doesn’t help.',
         lineBelow: true,
-        body: ['Strong checklist engagement, a clear effect on tree growth, and positive signals on matches and activity. Billing is positive and consistent, but not yet significant.']
+        body: ['The Checklist drove strong engagement and a clear lift in tree growth, with positive signals on matches and activity. Billing moved in the right direction but isn’t significant yet. The next opportunity: 75% of users who got stuck left the site, so suggesting another next step at that moment could keep them going.']
       }
     ]
   },

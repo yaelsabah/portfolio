@@ -79,6 +79,8 @@
 }
 .chapter-num { font-size: 15px; color: var(--muted); font-variant-numeric: tabular-nums; }
 .chapter-title { margin: 0; font-size: 36px; line-height: 1.18; }
+/* a chapter title with no line beside it takes the full width */
+.chapter:not(.is-sub) > .chapter-head:not(:has(.chapter-line)) .chapter-title { grid-column: 2 / -1; }
 .chapter-line { margin: 0; font-size: 16px; line-height: 1.45; color: var(--muted); }
 /* subtitle: the line sits under the title (phones already stack it this way),
    as large as the paragraph text and as dark as the title */
@@ -401,6 +403,8 @@
 .chapter-media.is-narrow { max-width: 375px; }
 
 .chapter-points strong { font-weight: 600; }
+/* a small coloured label under a point */
+.point-tag { display: block; margin-top: 8px; font-size: 15px; font-weight: 500; line-height: 1.65; color: var(--signal); }
 
 /* a phone beside the text: the text sits halfway down the phone instead of level with its top (stacked again on phones) */
 @media (min-width: 761px) {

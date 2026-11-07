@@ -53,6 +53,8 @@
   if (p.lead === false) document.querySelector('.case-lead').remove();
   // longTitle: a long project name is set smaller so it stays on one line
   if (p.longTitle) document.querySelector('.case-title h1').classList.add('is-long');
+  // titleSize: a project can set its own title size (any CSS length, e.g. a clamp())
+  if (p.titleSize) document.querySelector('.case-title h1').style.fontSize = p.titleSize;
 
   // chapters: a project can list its own (see projects.js); otherwise the shared template below.
   // An image is { src, alt, wide } composed in Figma, { crop: 'x% y%', zoom } taken from the
@@ -186,7 +188,9 @@
       const ul = document.createElement('ul');
       // quotes: the items are quotations, so no bullet dots
       ul.className = 'chapter-points' + (c.quotes ? ' is-quotes' : '');
-      c.points.forEach((pt) => {
+      c.points.forEach((item) => {
+        // a point is a string, or { text, tag } where tag is a small coloured label under it
+        const pt = typeof item === 'string' ? item : item.text;
         const li = document.createElement('li');
         if (c.quotes && pt.startsWith('“')) {
           // the opening quote mark is lifted out so it can be set very large above the quote
@@ -202,6 +206,12 @@
           li.append(strong, pt.slice(cut));
         } else {
           li.textContent = pt;
+        }
+        if (item.tag) {
+          const tag = document.createElement('span');
+          tag.className = 'point-tag';
+          tag.textContent = item.tag;
+          li.append(tag);
         }
         ul.append(li);
       });
@@ -454,6 +464,12 @@
       article.classList.add('has-subs');
       c.sections.forEach((s, j) => {
         const sub = buildChapter(s);
+        // subGap: room (px) between a title-only chapter and its first sub-section, instead of the tight default
+        if (j === 0 && c.subGap) {
+          const first = sub.querySelector('.chapter');
+          first.style.paddingTop = 'min(' + c.subGap + 'px, 12vw)';
+          first.style.marginTop = '0';
+        }
         if (j === c.sections.length - 1) sub.querySelector('.chapter').classList.add('is-last');
         list.append(sub);
       });
