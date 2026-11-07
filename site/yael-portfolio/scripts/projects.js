@@ -15,7 +15,7 @@ window.PROJECTS = [
     // cover image, also the poster shown until the video loads
     image: 'assets/images/life-tribute.jpg',
     // head image of the case study (laptop + phone from Figma, transparent background); when set it is used instead of the video
-    hero: 'assets/images/life-tribute-hero.png',
+    hero: 'assets/images/life-tribute-hero.webp',
     // colour behind the transparent head image: the page background, so the devices sit straight on the page
     heroBg: 'var(--ground)',
     heroAlt: 'The Life Tribute landing page on a laptop and a phone, with a wedding photograph, the headline, a Create Life Tribute button and a row of small photographs',
