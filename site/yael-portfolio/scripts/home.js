@@ -40,7 +40,7 @@
   const header = $('.site-header');
   const GAP = 28;            // space between the full-size card and the header / caption strip
   const PHONE_SIDE = 16;     // phones: space between the card and the screen edges
-  const CAP_GAP = 20;        // phones: space between the card and the caption under it
+  const CAP_GAP = 32;        // phones: space between the card and the caption under it
 
   let vw = 0, vh = 0, trackTop = 0, headH = 0, capH = 0, ctaH = 0, current = -1;
 
