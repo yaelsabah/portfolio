@@ -1,6 +1,6 @@
 // Text reveals on the home page below the hero:
-// - the project caption: the project name lights up letter by letter, then the counter,
-//   description and button fade in; it plays each time a project's caption appears
+// - the project caption: the project name lights up letter by letter, then the button
+//   fades in; it plays each time a project's caption appears
 //   and reverses when it leaves.
 // - About and Contact: the big sentences light up letter by letter as they scroll into
 //   view, and the labels, table and links fade in; scrolling back up reverses them.
@@ -15,7 +15,7 @@
     const IN = 1100;    // ms to reveal
     const OUT = 450;    // ms to hide
     const nameEl = caption.querySelector('.work-name');
-    const rest = ['.work-counter', '.work-desc', '.work-link'].map((s) => caption.querySelector(s)).filter(Boolean).map(fade);
+    const rest = ['.work-link'].map((s) => caption.querySelector(s)).filter(Boolean).map(fade);
     let name = letters(nameEl);
     let v = 0, target = 0, last = 0, running = false;
 

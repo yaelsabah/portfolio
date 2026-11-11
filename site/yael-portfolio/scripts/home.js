@@ -78,7 +78,8 @@
     vw = document.documentElement.clientWidth;
     vh = stage.clientHeight || window.innerHeight;
     headH = header.offsetHeight;
-    capH = caption.offsetHeight;
+    // the drawer's height when closed (the parts that open on hover don't count)
+    capH = caption.offsetHeight - [...caption.querySelectorAll('.work-more')].reduce((h, m) => h + m.offsetHeight, 0);
     track.style.height = Math.round(vh * (TOTAL + 1)) + 'px';
     trackTop = track.getBoundingClientRect().top + window.scrollY;
   }
@@ -172,6 +173,7 @@
     caption.style.opacity = capOpacity.toFixed(3);
     caption.style.pointerEvents = capOpacity > 0.5 ? 'auto' : 'none';
     caption._capOpacity = capOpacity;
+    if (capOpacity <= 0.5) caption.classList.remove('is-open');
     const capChanged = cur !== current;
     if (cur !== current) {
       current = cur;
@@ -208,6 +210,26 @@
       else scrollToY(document.getElementById(target).offsetTop - 80);
     });
   });
+
+  // the drawer opens over the image while the pointer is on the drawer or on the project image
+  let closeTimer = 0;
+  const openDrawer = (open) => {
+    clearTimeout(closeTimer);
+    if (open) caption.classList.add('is-open');
+    // a short pause so moving from the image onto the drawer doesn't close it
+    else closeTimer = setTimeout(() => caption.classList.remove('is-open'), 140);
+  };
+  if (window.matchMedia('(hover: hover)').matches) {
+    [caption, ...cards.map((c) => c.a)].forEach((el) => {
+      el.addEventListener('pointerenter', () => {
+        if ((caption._capOpacity || 0) > 0.5 && el.dataset.peek !== 'true') openDrawer(true);
+      });
+      el.addEventListener('pointerleave', () => openDrawer(false));
+    });
+  }
+  // keyboard users get the intro when the button is focused
+  caption.addEventListener('focusin', () => openDrawer(true));
+  caption.addEventListener('focusout', () => openDrawer(false));
 
   let ticking = false;
   const onScroll = () => {
