@@ -9,7 +9,6 @@
   --line: #E0DBD5;          /* hairlines and dividers */
   --accent: #111111;        /* links on hover, focus ring */
   --dim: #000000;           /* overlay on cards that sink back */
-  --glow: #F0D5C4;          /* the soft light that follows the cursor in the hero */
   --signal: #B83A24;        /* small labels in case studies, e.g. which flywheel step an idea drives */
 
   /* glass and blur */
