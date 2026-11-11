@@ -10,6 +10,8 @@
   --accent: #111111;        /* links on hover, focus ring */
   --dim: #000000;           /* overlay on cards that sink back */
   --signal: #B83A24;        /* small labels in case studies, e.g. which flywheel step an idea drives */
+  --hairline: rgba(17, 17, 17, 0.06);  /* the thin line under the header and above the open caption */
+  --cta-hover: #2B2B2B;     /* the button when hovered */
 
   /* glass and blur */
   --header-bg: rgba(247, 245, 243, 0.6);
@@ -41,6 +43,29 @@
 
   /* motion */
   --ease-out: cubic-bezier(.2, .8, .2, 1);
+}
+
+/* Dark mode: the same names with night values (scripts/theme-toggle.js switches data-theme) */
+:root { color-scheme: light; }
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --ground: #121211;
+  --surface: #1E1D1B;
+  --ink: #F1EEE9;
+  --muted: #A29D95;         /* 7:1 on ground */
+  --line: #2E2C29;
+  --accent: #F1EEE9;
+  --dim: #000000;
+  --signal: #EE8A70;
+  --hairline: rgba(255, 255, 255, 0.08);
+  --cta-hover: #D8D4CE;
+
+  --header-bg: rgba(18, 18, 17, 0.6);
+  --cap-bg: rgba(30, 29, 27, 0.5);
+
+  --shadow-ring: 0 0 0 1px rgba(255, 255, 255, 0.06);
+  --shadow-float: 0 30px 80px -30px rgba(0, 0, 0, 0.7);
+  --shadow-lift: 0 40px 90px -30px rgba(0, 0, 0, 0.8);
 }
 
 @media (max-width: 700px) {

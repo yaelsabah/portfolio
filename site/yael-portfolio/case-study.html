@@ -3,14 +3,23 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <script>
+    // light or dark before anything is drawn: the visitor's last choice, else their system setting
+    (function () {
+      var t = null;
+      try { t = localStorage.getItem('theme'); } catch (e) {}
+      if (t !== 'light' && t !== 'dark') t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      document.documentElement.dataset.theme = t;
+    })();
+  </script>
   <title>Case study, Yael</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&family=Instrument+Serif&display=swap">
-  <link rel="stylesheet" href="styles/tokens.css?v=2026111105">
-  <link rel="stylesheet" href="styles/global.css?v=2026111105">
-  <link rel="stylesheet" href="styles/case.css?v=2026111105">
-  <link rel="stylesheet" href="styles/corner.css?v=2026111105"></head>
+  <link rel="stylesheet" href="styles/tokens.css?v=2026111106">
+  <link rel="stylesheet" href="styles/global.css?v=2026111106">
+  <link rel="stylesheet" href="styles/case.css?v=2026111106">
+  <link rel="stylesheet" href="styles/theme-toggle.css?v=2026111106"></head>
 <body>
 
   <header class="site-header">
@@ -116,10 +125,8 @@
     </article>
   </template>
 
-  <script src="scripts/projects.js?v=2026111105"></script>
-  <script src="scripts/case.js?v=2026111105"></script>
-  <script src="scripts/corner.js?v=2026111105"></script>
-  <!-- TEMPORARY: switches between the right-corner ideas -->
-  <script src="scripts/corner-picker.js?v=2026111105"></script>
+  <script src="scripts/projects.js?v=2026111106"></script>
+  <script src="scripts/case.js?v=2026111106"></script>
+  <script src="scripts/theme-toggle.js?v=2026111106"></script>
 </body>
 </html>
