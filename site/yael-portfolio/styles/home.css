@@ -33,8 +33,8 @@
 /* letter-by-letter reveal (scripts/hero-reveal.js); the intro stays hidden until the letters are ready */
 .hero-pending .work-intro { visibility: hidden; }
 .rv-word { display: inline-block; white-space: nowrap; }
-/* the title under the name: the same size as the About and Contact titles, 24px below the name */
-.work-intro p { margin: 24px 0 0; font-size: 22px; line-height: 1.15; letter-spacing: -0.01em; color: var(--ink); }
+/* the title under the name, 24px below it */
+.work-intro p { margin: 24px 0 0; font-size: 29px; line-height: 1.15; letter-spacing: -0.01em; color: var(--ink); }
 
 .work-card {
   position: absolute;
@@ -126,6 +126,8 @@
   border-top: 1px solid var(--line);
   scroll-margin-top: 80px;
 }
+/* breathing room between the last project and About */
+#about { margin-top: clamp(96px, 16vh, 180px); }
 .section-grid {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
@@ -189,6 +191,7 @@
   .work-name { font-size: 26px; }
   .work-desc { display: none; }
   .section { padding: 72px 0; }
+  #about { margin-top: 64px; }
   .section-grid { grid-template-columns: minmax(0, 1fr); gap: 20px; }
   .big-statement { font-size: 30px; }
   .mail-link { font-size: 24px; }
