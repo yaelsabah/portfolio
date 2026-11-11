@@ -5,9 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Yael, product designer</title>
   <meta name="description" content="Product designer making complex tools feel simple to use.">
+  <script>
+    // hide the hero text until hero-reveal.js has set up the letters (never longer than 3s)
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      document.documentElement.classList.add('hero-pending');
+      setTimeout(function () { document.documentElement.classList.remove('hero-pending'); }, 3000);
+    }
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&display=swap">
   <link rel="stylesheet" href="styles/tokens.css">
   <link rel="stylesheet" href="styles/global.css">
   <link rel="stylesheet" href="styles/home.css"></head>
@@ -91,6 +98,7 @@
 
   <script src="scripts/projects.js"></script>
   <script src="scripts/home.js"></script>
+  <script src="scripts/hero-reveal.js"></script>
   <script src="scripts/hero-motion.js"></script>
 </body>
 </html>

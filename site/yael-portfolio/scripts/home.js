@@ -161,7 +161,10 @@
 
     // headline fades and lifts away
     intro.style.top = (phone ? Math.max(110, vh * 0.2) : Math.max(130, vh * 0.26)) + 'px';
-    intro.style.opacity = reduceMotion ? (s > 0.1 ? 0 : 1) : clamp(1 - s / 0.4).toFixed(3);
+    const introVis = reduceMotion ? (s > 0.1 ? 0 : 1) : clamp(1 - s / 0.4);
+    intro._vis = introVis;
+    if (intro.dataset.reveal) intro.dispatchEvent(new CustomEvent('herovisibility', { detail: introVis }));
+    else intro.style.opacity = introVis.toFixed(3);
     intro.style.transform = reduceMotion ? 'none' : `translateY(${(-Math.min(s, 1) * 180).toFixed(1)}px)`;
 
     // caption for the project on screen
