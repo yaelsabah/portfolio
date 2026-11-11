@@ -1,6 +1,6 @@
 // Light / dark mode: a simple switch in the header's right corner.
 // The theme sweeps across the page from left to right when it changes.
-// The page starts in the visitor's last choice, or their system setting (see the small
+// The page starts in the visitor's last choice, or light (see the small
 // script in each page's <head>, which sets data-theme before anything is drawn).
 (() => {
   const header = document.querySelector('.site-header');
@@ -47,13 +47,4 @@
   }
 
   btn.addEventListener('click', () => switchTo(isDark() ? 'light' : 'dark', true));
-
-  // follow the system setting while the visitor hasn't picked one
-  const system = window.matchMedia('(prefers-color-scheme: dark)');
-  const onSystem = (e) => {
-    let saved = null;
-    try { saved = localStorage.getItem('theme'); } catch (err) {}
-    if (!saved) switchTo(e.matches ? 'dark' : 'light', false);
-  };
-  if (system.addEventListener) system.addEventListener('change', onSystem);
 })();
