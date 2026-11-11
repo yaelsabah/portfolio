@@ -9,6 +9,19 @@
   overflow: hidden;
 }
 
+/* the soft light that follows the cursor behind the name (scripts/glow.js) */
+.hero-glow {
+  position: absolute;
+  left: 0; top: 0;
+  z-index: 0;
+  width: 560px; height: 560px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--glow) 0%, rgba(240, 213, 196, 0.55) 35%, rgba(240, 213, 196, 0) 70%);
+  filter: blur(40px);
+  pointer-events: none;
+  will-change: transform, opacity;
+}
+.work-intro { z-index: 1; }
 .work-intro {
   position: absolute;
   left: 0; right: 0;
