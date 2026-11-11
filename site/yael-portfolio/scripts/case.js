@@ -542,6 +542,8 @@
     const link = document.querySelector('[data-field="' + key + '"]');
     link.href = window.caseStudyUrl(q.slug);
     link.querySelector('.glimpse img').src = q.image;
+    // covers with a see-through background sit bare on the page, as on the home card
+    if (q.cardBg) link.querySelector('.glimpse').classList.add('is-bare');
     link.querySelector('.project-link-name').textContent = q.name;
   });
 
