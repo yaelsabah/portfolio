@@ -71,20 +71,35 @@ button:focus-visible {
 .site-nav { display: flex; gap: 4px; font-size: 16px; }
 
 .nav-link {
+  --pad-x: 16px;
+  position: relative;
   text-decoration: none;
-  padding: 10px 16px;
+  padding: 10px var(--pad-x);
   border-radius: var(--r-pill);
-  transition: background-color .3s ease, color .3s ease;
+  transition: color .3s ease;
 }
-.nav-link:hover { background: rgba(17, 17, 17, 0.06); color: var(--ink); }
-/* the current section is underlined */
+/* underline that draws in from the left on hover and slides out to the right after;
+   the current section keeps it */
+.nav-link::after {
+  content: '';
+  position: absolute;
+  left: var(--pad-x); right: var(--pad-x);
+  bottom: 5px;
+  height: 1.5px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: right center;
+  transition: transform .45s var(--ease-out);
+}
+.nav-link:hover { color: var(--ink); }
+.nav-link:hover::after,
+.nav-link[aria-current="true"]::after,
+.nav-link[aria-current="page"]::after {
+  transform: scaleX(1);
+  transform-origin: left center;
+}
 .nav-link[aria-current="true"],
-.nav-link[aria-current="page"] {
-  color: var(--ink);
-  text-decoration: underline;
-  text-decoration-thickness: 1.5px;
-  text-underline-offset: 8px;
-}
+.nav-link[aria-current="page"] { color: var(--ink); }
 
 /* ---------- Buttons ---------- */
 .cta {
@@ -130,7 +145,7 @@ button:focus-visible {
 /* ---------- Phones ---------- */
 @media (max-width: 700px) {
   .site-header { padding: 6px 12px; }
-  .nav-link { padding: 10px 12px; }
+  .nav-link { --pad-x: 12px; }
   .site-footer .wrap { flex-direction: column; align-items: flex-start; }
 }
 

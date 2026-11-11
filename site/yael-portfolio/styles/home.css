@@ -26,7 +26,7 @@
   max-width: 20ch;
   font-size: clamp(51px, 7.5vw, 108px);
   font-weight: 600;
-  letter-spacing: -0.02em;
+  letter-spacing: 0;
   line-height: 1;
 }
 .work-intro h1, .work-intro p { will-change: transform; }
@@ -82,7 +82,7 @@
 .work-caption .work-link { flex: none; }
 .work-caption-text { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
 .work-counter { font-size: 14px; color: var(--muted); }
-.work-name { font-size: clamp(30px, 3.6vw, 56px); line-height: 1; font-weight: 500; letter-spacing: -0.03em; }
+.work-name { font-family: var(--font-display); font-size: clamp(30px, 3.6vw, 56px); line-height: 1; font-weight: 500; letter-spacing: var(--display-tracking); }
 .work-desc { font-size: 15px; line-height: 1.4; color: var(--muted); max-width: 48ch; }
 
 /* ---------- About and contact ---------- */
@@ -96,7 +96,7 @@
   grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
   gap: 32px 64px;
 }
-.section-title { margin: 0; font-size: 22px; font-weight: 500; letter-spacing: -0.01em; }
+.section-title { margin: 0; font-family: var(--font-display); font-size: 22px; font-weight: 500; letter-spacing: -0.01em; }
 .section-body { display: flex; flex-direction: column; gap: 40px; min-width: 0; }
 
 .big-statement {

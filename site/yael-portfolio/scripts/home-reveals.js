@@ -10,7 +10,8 @@
 
   // ---- Project caption ----
   const caption = document.querySelector('.work-caption');
-  if (caption) {
+  // only when home.js reports the caption's state; otherwise leave the caption as it is
+  if (caption && typeof caption._capOpacity === 'number') {
     const IN = 1100;    // ms to reveal
     const OUT = 450;    // ms to hide
     const nameEl = caption.querySelector('.work-name');

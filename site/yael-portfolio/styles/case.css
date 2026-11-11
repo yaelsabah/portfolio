@@ -65,7 +65,7 @@
   line-height: 1.18;
 }
 
-.case-section-title { margin: 0 0 16px; font-size: 22px; font-weight: 500; }
+.case-section-title { margin: 0 0 16px; font-family: var(--font-display); font-size: 22px; font-weight: 500; }
 
 /* ---------- Chapters (all open, read straight down) ---------- */
 .case-chapters { margin-top: 192px; }

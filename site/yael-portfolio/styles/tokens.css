@@ -29,11 +29,14 @@
   --r-pill: 999px;
 
   /* type */
-  --font-display: 'Instrument Sans', 'Helvetica Neue', Arial, sans-serif;
+  /* TRIAL: titles in Didot (built into Macs and iPhones; GFS Didot from Google Fonts elsewhere).
+     To go back, swap the two --font-display lines and set --display-tracking back to -0.035em. */
+  --font-display: 'Didot', 'GFS Didot', 'Bodoni Moda', Georgia, serif;
+  /* --font-display: 'Instrument Sans', 'Helvetica Neue', Arial, sans-serif; */
   --font-body: 'Instrument Sans', 'Helvetica Neue', Arial, sans-serif;
   --font-serif: 'Instrument Serif', Georgia, 'Times New Roman', serif;  /* the quote marks in case studies */
   --display-weight: 500;
-  --display-tracking: -0.035em;
+  --display-tracking: -0.01em;
 
   /* layout */
   --page-max: 1376px;
