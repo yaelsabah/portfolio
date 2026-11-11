@@ -1,0 +1,93 @@
+<!doctype html>
+<!-- DESIGN EXPLORATION: homepage concept B, Quiet. Not linked from the live site. -->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="robots" content="noindex">
+  <script>
+    (function () {
+      var t = null;
+      try { t = localStorage.getItem('theme'); } catch (e) {}
+      if (t !== 'light' && t !== 'dark') t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      document.documentElement.dataset.theme = t;
+      document.documentElement.classList.add('js');
+    })();
+  </script>
+  <title>Yael, product designer</title>
+  <meta name="description" content="Product designer making complex tools feel simple to use.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300..600&family=Geist+Mono:wght@400..500&display=swap">
+  <link rel="stylesheet" href="styles/theme-toggle.css">
+  <link rel="stylesheet" href="concepts/b.css?v=1">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="#top" data-scramble>Yael Sabah</a>
+    <nav class="nav" aria-label="Main">
+      <a href="#work" data-scramble>Work</a>
+      <a href="#about" data-scramble>About</a>
+      <a href="#contact" data-scramble>Contact</a>
+    </nav>
+  </header>
+
+  <div class="ruler" aria-hidden="true"><div class="ruler-mark"><span class="ruler-n">000</span></div></div>
+
+  <main id="top">
+    <section class="hero">
+      <p class="mono hero-meta"><span>Senior product designer</span><span>Selected work, 2024–2026</span></p>
+      <h1 class="lede" aria-label="Yael Sabah. Senior product designer making complex tools feel simple to use.">
+        <span aria-hidden="true" data-words>Yael Sabah is a senior product designer making <span class="tangle">complex</span> tools feel <span class="plain">simple</span> to use.</span>
+      </h1>
+      <a class="mono hero-scroll" href="#work"><span class="dot"></span>Scroll to the work</a>
+    </section>
+
+    <section id="work" class="work" aria-labelledby="work-h">
+      <div class="sec-head mono"><h2 id="work-h">Work</h2><span class="count"></span></div>
+      <div class="index"></div>
+    </section>
+
+    <section id="about" class="about" aria-labelledby="about-h">
+      <div class="sec-head mono"><h2 id="about-h">About</h2><span>(02)</span></div>
+      <div class="cols">
+        <p class="statement" data-words>I design products end to end, from discovery to coded prototypes.</p>
+        <ul class="cv">
+          <li><span class="mono">2024–Present</span><strong>MyHeritage</strong><span>Senior product designer, Building the future AI product Lifecycle</span></li>
+          <li><span class="mono">2019–2024</span><strong>Healthy.io</strong><span>Senior product designer</span></li>
+          <li><span class="mono">2015–2019</span><strong>Designit</strong><span>Experience designer</span></li>
+          <li><span class="mono">2011–2015</span><strong>Shenkar</strong><span>B.Des. in Visual Communication specializing in the field of Interactive Design</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="contact" class="contact" aria-labelledby="contact-h">
+      <div class="sec-head mono"><span>Contact</span><span>(03)</span></div>
+      <div class="cols">
+        <h2 id="contact-h" class="statement big" data-words>Keep in touch</h2>
+        <div class="reach">
+          <p class="mail-row">
+            <a class="mail" href="mailto:sabah.yael@gmail.com">sabah.yael@gmail.com</a>
+            <button class="copy mono" type="button" data-copy="sabah.yael@gmail.com" aria-live="polite">Copy</button>
+          </p>
+          <p class="links mono">
+            <a href="https://www.linkedin.com/in/yaelsabah" target="_blank" rel="noopener" data-scramble>LinkedIn</a>
+            <a href="assets/Yael_Sabah_CV_2026.pdf" download data-scramble>Download CV</a>
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot mono">
+    <p>© 2026 Yael. Designed and built by me.</p>
+    <a href="#top" data-scramble>Back to top</a>
+  </footer>
+  <div class="peek" aria-hidden="true"><div class="peek-in"></div></div>
+  <script src="scripts/projects.js"></script>
+  <script src="concepts/b.js?v=1"></script>
+  <script src="scripts/theme-toggle.js"></script>
+  <script src="scripts/device-preview.js"></script>
+  <script src="concepts/switch.js"></script>
+</body>
+</html>
