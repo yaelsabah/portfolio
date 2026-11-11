@@ -11,8 +11,8 @@
   if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-  const NAME_SHIFT = 18;   // most the name moves, in px, with the pointer at the edge of the screen
-  const TITLE_SHIFT = 9;   // most the title moves
+  const NAME_SHIFT = 30;   // most the name moves, in px, with the pointer at the edge of the screen
+  const TITLE_SHIFT = 15;  // most the title moves
   const EASE = 0.08;       // how quickly the text catches up (0–1, lower trails more)
 
   let tx = 0, ty = 0;      // target, from -1 to 1 across the screen
