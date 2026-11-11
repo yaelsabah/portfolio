@@ -239,7 +239,7 @@
       const target = el.dataset.scroll;
       if (target === 'top') scrollToY(0);
       else if (target === 'work') scrollToY(trackTop + vh * (RISE + 0.05));
-      else scrollToY(document.getElementById(target).offsetTop - headH - 24);
+      else scrollToY(document.getElementById(target).offsetTop - 80);
     });
   });
 
