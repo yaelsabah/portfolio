@@ -39,6 +39,8 @@
 
   const header = $('.site-header');
   const GAP = 28;            // space between the full-size card and the header / caption strip
+  const PHONE_SIDE = 16;     // phones: space between the card and the screen edges
+  const CAP_GAP = 20;        // phones: space between the card and the caption under it
 
   let vw = 0, vh = 0, trackTop = 0, headH = 0, capH = 0, current = -1;
 
@@ -79,8 +81,23 @@
     vw = document.documentElement.clientWidth;
     vh = stage.clientHeight || window.innerHeight;
     headH = header.offsetHeight;
-    // the drawer's height when closed (the parts that open on hover don't count)
-    capH = caption.offsetHeight - [...caption.querySelectorAll('.work-more')].reduce((h, m) => h + m.offsetHeight, 0);
+    if (vw < PHONE_BREAKPOINT) {
+      // phones show the whole caption under the image: room for the tallest one
+      const probe = caption.cloneNode(true);
+      probe.removeAttribute('aria-live');
+      probe.style.cssText = 'visibility:hidden;opacity:0;top:0;left:' + PHONE_SIDE + 'px;right:' + PHONE_SIDE + 'px';
+      stage.append(probe);
+      capH = 0;
+      projects.forEach((p) => {
+        probe.querySelector('.work-name').textContent = p.name;
+        probe.querySelector('.work-desc').textContent = p.outcome;
+        capH = Math.max(capH, probe.offsetHeight);
+      });
+      probe.remove();
+    } else {
+      // the drawer's height when closed (the parts that open on hover don't count)
+      capH = caption.offsetHeight - [...caption.querySelectorAll('.work-more')].reduce((h, m) => h + m.offsetHeight, 0);
+    }
     track.style.height = Math.round(vh * (TOTAL + 1)) + 'px';
     trackTop = track.getBoundingClientRect().top + window.scrollY;
   }
@@ -89,21 +106,25 @@
     const s = Math.max(0, (window.scrollY - trackTop) / vh);
     const phone = vw < PHONE_BREAKPOINT;
 
-    // geometry: desktop keeps the screenshot ratio, phones use a taller card.
-    // The full-size card fits in the space between the header and the caption strip.
+    // geometry: cards keep the screenshot ratio on every screen.
+    // Desktop: the full-size card fits between the header and the caption strip.
+    // Phones: the card and the caption under it sit together in the middle of the space below the header.
     const gap = phone ? 16 : GAP;
-    const room = Math.max(160, vh - headH - capH - gap * 2);
-    let W0, W1, A, cy1;
+    const A = 1 / 1.8;
+    let W0, W1, cy1;
     if (phone) {
-      W1 = vw - 32;
-      A = Math.min(room, W1 * 1.35) / W1;
+      W1 = vw - PHONE_SIDE * 2;
       W0 = vw - 56;
+      const groupH = W1 * A + CAP_GAP + capH;
+      const top = headH + Math.max(gap, (vh - headH - groupH) / 2);
+      cy1 = top + (W1 * A) / 2;
+      caption.style.setProperty('--cap-top', (top + W1 * A + CAP_GAP).toFixed(1) + 'px');
     } else {
+      const room = Math.max(160, vh - headH - capH - gap * 2);
       W1 = Math.min(vw * 0.84, room * 1.8);
-      A = 1 / 1.8;
       W0 = Math.min(vw * START_WIDTH, 1100);
+      cy1 = headH + gap + room / 2;
     }
-    cy1 = headH + gap + room / 2;
     const H0 = W0 * A, H1 = W1 * A;
     const top0 = vh * (1 - (phone ? Math.min(PEEK, 0.18) : PEEK));
     const cx = vw / 2;
@@ -162,7 +183,8 @@
     caption.style.setProperty('--card-inset', ((vw - W1) / 2).toFixed(1) + 'px');
 
     // headline fades and lifts away
-    intro.style.top = (phone ? Math.max(110, vh * 0.2) : Math.max(130, vh * 0.26)) + 'px';
+    // phones: the name and title sit in the middle of the screen
+    intro.style.top = (phone ? Math.max(headH, (vh - intro.offsetHeight) / 2) : Math.max(130, vh * 0.26)) + 'px';
     const introVis = reduceMotion ? (s > 0.1 ? 0 : 1) : clamp(1 - s / 0.4);
     intro._vis = introVis;
     if (intro.dataset.reveal) intro.dispatchEvent(new CustomEvent('herovisibility', { detail: introVis }));
