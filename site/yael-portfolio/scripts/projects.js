@@ -114,7 +114,9 @@ window.PROJECTS = [
     industry: 'B2C',
     company: 'MyHeritage',
     year: '2025',
-    image: 'assets/images/checklist.jpg',
+    image: 'assets/images/checklist.webp',
+    // the cover has a see-through background, so the card takes the page colour (light or dark)
+    cardBg: 'var(--ground)',
     backdrop: 'assets/images/checklist-backdrop.jpg',
     alt: 'The Checklist panel in the MyHeritage family tree, with a progress bar and the next steps to take',
     crops: ['70% 30%', '70% 60%'],

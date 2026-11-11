@@ -48,6 +48,7 @@
     a.className = 'work-card';
     a.href = window.caseStudyUrl(p.slug);
     a.style.zIndex = String(10 + q);
+    if (p.cardBg) a.style.background = p.cardBg;
     // a project with a video plays it muted on a loop; the image stays as its poster.
     // cardVideo: false keeps the still image on the card (the case study can still use the video)
     const cardVideo = p.video && p.cardVideo !== false;
@@ -216,16 +217,22 @@
   const openDrawer = (open) => {
     clearTimeout(closeTimer);
     if (open) caption.classList.add('is-open');
-    // a short pause so moving from the image onto the drawer doesn't close it
+    // a short pause so a quick move out of the zone and back doesn't flicker
     else closeTimer = setTimeout(() => caption.classList.remove('is-open'), 140);
   };
+  // it opens while the pointer is in the bottom quarter of the screen
+  const DRAWER_ZONE = 0.75;   // the zone starts this far down the screen (0–1)
+  let pointerY = -1;
+  const checkDrawer = () => {
+    const inZone = pointerY >= window.innerHeight * DRAWER_ZONE;
+    if (inZone && (caption._capOpacity || 0) > 0.5) openDrawer(true);
+    else if (caption.classList.contains('is-open') && !caption.contains(document.activeElement)) openDrawer(false);
+  };
   if (window.matchMedia('(hover: hover)').matches) {
-    [caption, ...cards.map((c) => c.a)].forEach((el) => {
-      el.addEventListener('pointerenter', () => {
-        if ((caption._capOpacity || 0) > 0.5 && el.dataset.peek !== 'true') openDrawer(true);
-      });
-      el.addEventListener('pointerleave', () => openDrawer(false));
-    });
+    window.addEventListener('pointermove', (e) => { pointerY = e.clientY; checkDrawer(); }, { passive: true });
+    document.documentElement.addEventListener('pointerleave', () => { pointerY = -1; checkDrawer(); });
+    // the drawer can come into view under a still pointer as the page scrolls
+    window.addEventListener('scroll', checkDrawer, { passive: true });
   }
   // keyboard users get the intro when the button is focused
   caption.addEventListener('focusin', () => openDrawer(true));

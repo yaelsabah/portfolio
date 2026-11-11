@@ -1,4 +1,4 @@
-/* The day/night switch in the header's right corner (scripts/theme-toggle.js) */
+/* The light/dark switch in the header's right corner (scripts/theme-toggle.js) */
 .header-end {
   grid-column: 3;
   justify-self: end;
@@ -6,119 +6,42 @@
   align-items: center;
 }
 
+/* a very simple switch: an outlined pill with a dot, in the text colour */
 .theme-toggle {
-  /* kept out of the page sweep so the knob can be seen sliding */
+  /* kept out of the page sweep so the dot can be seen sliding */
   view-transition-name: theme-toggle;
-  padding: 6px 0;
+  padding: 10px 0;
+  color: var(--ink);
   background: none;
   border: 0;
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
+  transition: opacity .25s ease;
 }
+.theme-toggle:hover { opacity: .65; }
 .theme-toggle:focus-visible { outline: none; }
 .theme-toggle:focus-visible .tt-track { outline: 2px solid var(--accent); outline-offset: 3px; }
 
 .tt-track {
-  --w: 60px;
-  --h: 30px;
-  --knob: 24px;
   position: relative;
   display: block;
-  width: var(--w);
-  height: var(--h);
-  overflow: hidden;
+  width: 34px;
+  height: 20px;
+  border: 1.5px solid currentColor;
   border-radius: var(--r-pill);
-  /* day sky */
-  background: linear-gradient(180deg, #7CC8F2 0%, #B5E2FA 100%);
-  box-shadow: inset 0 1px 3px rgba(0, 0, 0, .18), 0 0 0 1px rgba(17, 17, 17, .06);
-  transition: background .6s ease, box-shadow .6s ease;
 }
-/* night sky, laid over the day sky so the change can fade */
-.tt-track::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, #0E1633 0%, #26325C 100%);
-  opacity: 0;
-  transition: opacity .6s ease;
-}
-
-/* the knob: a sun by day; by night it slides right and becomes the moon */
 .tt-knob {
   position: absolute;
-  top: calc((var(--h) - var(--knob)) / 2);
-  left: calc((var(--h) - var(--knob)) / 2);
-  width: var(--knob);
-  height: var(--knob);
+  top: 50%;
+  left: 3px;
+  width: 11px;
+  height: 11px;
+  margin-top: -5.5px;
   border-radius: 50%;
-  background: radial-gradient(circle at 35% 35%, #FFE27A 0%, #FFC43A 55%, #F7A928 100%);
-  box-shadow: 0 0 0 3px rgba(255, 214, 90, .28), 0 0 12px 2px rgba(255, 196, 58, .45), 0 2px 4px rgba(0, 0, 0, .2);
-  transition: transform .6s cubic-bezier(.65, 0, .35, 1), background .6s ease, box-shadow .6s ease;
+  background: currentColor;
+  transition: transform .45s cubic-bezier(.65, 0, .35, 1);
 }
-.tt-crater {
-  position: absolute;
-  border-radius: 50%;
-  background: #B9B6C8;
-  opacity: 0;
-  transition: opacity .4s ease .15s;
-}
-.tt-crater-1 { width: 7px; height: 7px; top: 5px; left: 11px; }
-.tt-crater-2 { width: 4px; height: 4px; top: 14px; left: 6px; }
-.tt-crater-3 { width: 5px; height: 5px; top: 15px; left: 14px; }
-
-/* day: two small clouds drift on the right */
-.tt-cloud {
-  position: absolute;
-  height: 7px;
-  border-radius: 7px;
-  background: #fff;
-  opacity: .95;
-  transition: transform .6s cubic-bezier(.65, 0, .35, 1), opacity .4s ease;
-}
-.tt-cloud::before {
-  content: '';
-  position: absolute;
-  left: 4px; bottom: 3px;
-  width: 8px; height: 8px;
-  border-radius: 50%;
-  background: #fff;
-}
-.tt-cloud-1 { width: 18px; top: 9px; right: 7px; }
-.tt-cloud-2 { width: 13px; top: 18px; right: 15px; opacity: .8; }
-
-/* night: a few stars on the left */
-.tt-star {
-  position: absolute;
-  width: 2px; height: 2px;
-  border-radius: 50%;
-  background: #fff;
-  opacity: 0;
-  transform: scale(.4);
-  transition: opacity .4s ease, transform .4s ease;
-}
-.tt-star-1 { top: 7px; left: 9px; }
-.tt-star-2 { top: 16px; left: 16px; width: 3px; height: 3px; }
-.tt-star-3 { top: 9px; left: 24px; }
-.tt-star-4 { top: 21px; left: 7px; }
-
-/* ---- night ---- */
-.theme-toggle[aria-checked="true"] .tt-track { box-shadow: inset 0 1px 3px rgba(0, 0, 0, .5), 0 0 0 1px rgba(255, 255, 255, .08); }
-.theme-toggle[aria-checked="true"] .tt-track::before { opacity: 1; }
-.theme-toggle[aria-checked="true"] .tt-knob {
-  transform: translateX(calc(var(--w) - var(--h)));
-  background: radial-gradient(circle at 35% 35%, #FBFAFF 0%, #E4E1EE 60%, #CFCBDD 100%);
-  box-shadow: 0 0 0 3px rgba(228, 225, 238, .12), 0 0 12px 2px rgba(200, 205, 255, .25), 0 2px 4px rgba(0, 0, 0, .4);
-}
-.theme-toggle[aria-checked="true"] .tt-crater { opacity: .7; }
-.theme-toggle[aria-checked="true"] .tt-cloud { opacity: 0; transform: translateX(18px); }
-.theme-toggle[aria-checked="true"] .tt-star { opacity: .9; transform: none; }
-.theme-toggle[aria-checked="true"] .tt-star-2 { transition-delay: .1s; }
-.theme-toggle[aria-checked="true"] .tt-star-3 { transition-delay: .2s; }
-.theme-toggle[aria-checked="true"] .tt-star-4 { transition-delay: .15s; }
-
-/* a little lift on hover */
-.theme-toggle:hover .tt-knob { box-shadow: 0 0 0 4px rgba(255, 214, 90, .32), 0 0 14px 3px rgba(255, 196, 58, .5), 0 2px 4px rgba(0, 0, 0, .2); }
-.theme-toggle[aria-checked="true"]:hover .tt-knob { box-shadow: 0 0 0 4px rgba(228, 225, 238, .16), 0 0 14px 3px rgba(200, 205, 255, .3), 0 2px 4px rgba(0, 0, 0, .4); }
+.theme-toggle[aria-checked="true"] .tt-knob { transform: translateX(14px); }
 
 /* ---- the sweep across the page when the theme changes ---- */
 ::view-transition-old(root),
@@ -133,14 +56,6 @@
 ::view-transition-new(theme-toggle) { animation: none; }
 ::view-transition-group(theme-toggle) { animation: none; z-index: 3; }
 
-@media (max-width: 700px) {
-  .tt-track { --w: 52px; --h: 26px; --knob: 20px; }
-  .tt-crater-1 { top: 4px; left: 9px; width: 6px; height: 6px; }
-  .tt-crater-2 { top: 11px; left: 4px; }
-  .tt-crater-3 { top: 12px; left: 11px; width: 4px; height: 4px; }
-  .tt-cloud-1 { top: 7px; right: 5px; width: 15px; }
-  .tt-cloud-2 { top: 15px; right: 12px; width: 11px; }
-}
 @media (prefers-reduced-motion: reduce) {
-  .tt-track, .tt-track::before, .tt-knob, .tt-crater, .tt-cloud, .tt-star { transition: none; }
+  .tt-knob { transition: none; }
 }

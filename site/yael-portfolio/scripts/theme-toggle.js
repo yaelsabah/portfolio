@@ -1,4 +1,4 @@
-// Light / dark mode: a day/night switch in the header's right corner.
+// Light / dark mode: a simple switch in the header's right corner.
 // The theme sweeps across the page from left to right when it changes.
 // The page starts in the visitor's last choice, or their system setting (see the small
 // script in each page's <head>, which sets data-theme before anything is drawn).
@@ -16,13 +16,8 @@
   btn.className = 'theme-toggle';
   btn.setAttribute('role', 'switch');
   btn.setAttribute('aria-label', 'Dark mode');
-  // the switch: a sky with clouds and a sun by day, stars and a moon by night
-  btn.innerHTML =
-    '<span class="tt-track" aria-hidden="true">' +
-      '<span class="tt-cloud tt-cloud-1"></span><span class="tt-cloud tt-cloud-2"></span>' +
-      '<span class="tt-star tt-star-1"></span><span class="tt-star tt-star-2"></span><span class="tt-star tt-star-3"></span><span class="tt-star tt-star-4"></span>' +
-      '<span class="tt-knob"><span class="tt-crater tt-crater-1"></span><span class="tt-crater tt-crater-2"></span><span class="tt-crater tt-crater-3"></span></span>' +
-    '</span>';
+  // the switch: an outlined pill with a dot that slides right for dark
+  btn.innerHTML = '<span class="tt-track" aria-hidden="true"><span class="tt-knob"></span></span>';
   slot.append(btn);
   header.append(slot);
 
