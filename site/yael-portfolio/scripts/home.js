@@ -42,7 +42,7 @@
   const PHONE_SIDE = 16;     // phones: space between the card and the screen edges
   const CAP_GAP = 20;        // phones: space between the card and the caption under it
 
-  let vw = 0, vh = 0, trackTop = 0, headH = 0, capH = 0, current = -1;
+  let vw = 0, vh = 0, trackTop = 0, headH = 0, capH = 0, ctaH = 0, current = -1;
 
   // ---- Build one card per project ----
   const cards = projects.map((p, q) => {
@@ -87,13 +87,17 @@
       probe.removeAttribute('aria-live');
       probe.style.cssText = 'visibility:hidden;opacity:0;top:0;left:' + PHONE_SIDE + 'px;right:' + PHONE_SIDE + 'px';
       stage.append(probe);
+      // the text block only: the button sits apart at the bottom of the screen
+      const text = probe.querySelector('.work-caption-text');
       capH = 0;
       projects.forEach((p) => {
         probe.querySelector('.work-name').textContent = p.name;
         probe.querySelector('.work-desc').textContent = p.outcome;
-        capH = Math.max(capH, probe.offsetHeight);
+        capH = Math.max(capH, text.offsetHeight);
       });
       probe.remove();
+      // space the button takes at the bottom, measured from the caption's bottom edge
+      ctaH = vh - caption.getBoundingClientRect().bottom + capLink.offsetHeight;
     } else {
       // the drawer's height when closed (the parts that open on hover don't count)
       capH = caption.offsetHeight - [...caption.querySelectorAll('.work-more')].reduce((h, m) => h + m.offsetHeight, 0);
@@ -115,8 +119,9 @@
     if (phone) {
       W1 = vw - PHONE_SIDE * 2;
       W0 = vw - 56;
+      // the image and its text sit in the middle of the space between the header and the button
       const groupH = W1 * A + CAP_GAP + capH;
-      const top = headH + Math.max(gap, (vh - headH - groupH) / 2);
+      const top = headH + Math.max(gap, (vh - headH - ctaH - gap - groupH) / 2);
       cy1 = top + (W1 * A) / 2;
       caption.style.setProperty('--cap-top', (top + W1 * A + CAP_GAP).toFixed(1) + 'px');
     } else {
@@ -234,7 +239,7 @@
       const target = el.dataset.scroll;
       if (target === 'top') scrollToY(0);
       else if (target === 'work') scrollToY(trackTop + vh * (RISE + 0.05));
-      else scrollToY(document.getElementById(target).offsetTop - 80);
+      else scrollToY(document.getElementById(target).offsetTop - headH - 24);
     });
   });
 

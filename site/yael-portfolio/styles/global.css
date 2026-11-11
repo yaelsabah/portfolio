@@ -153,8 +153,17 @@ button:focus-visible {
 
 /* ---------- Phones ---------- */
 @media (max-width: 700px) {
-  .site-header { padding: 6px 12px; }
-  .nav-link { --pad-x: 12px; }
+  /* two floors: initials and the light/dark switch on top, the menu underneath */
+  .site-header {
+    grid-template-columns: minmax(0, 1fr) auto;
+    row-gap: 0;
+    padding: 4px var(--gutter) 2px;
+  }
+  .site-header .logo { grid-column: 1; grid-row: 1; }
+  .header-end { grid-column: 2; grid-row: 1; }
+  .site-nav { grid-column: 1 / -1; grid-row: 2; margin-left: calc(-1 * var(--pad-x)); }
+  .nav-link { --pad-x: 12px; padding-top: 8px; padding-bottom: 12px; }
+  .nav-link::after { bottom: 6px; }
   .site-footer .wrap { flex-direction: column; align-items: flex-start; }
 }
 
