@@ -238,58 +238,133 @@
   caption.addEventListener('focusin', () => openDrawer(true));
   caption.addEventListener('focusout', () => openDrawer(false));
 
-  // ---- Magnet: after scrolling stops part-way between two resting states (the hero, or a
-  // project filling the screen), glide on to the next one in the direction of travel ----
-  const SNAP_IDLE = 150;     // ms without scrolling before the magnet pulls
-  const COMMIT = 0.03;       // share of a transition the user must scroll before it carries on
+  // ---- Step scrolling through the projects ----
+  // Between the hero and the last project, one scroll gesture (a wheel flick, a trackpad
+  // swipe, a touch swipe or an arrow key) moves exactly one stop: hero → each project in turn.
+  // The momentum that follows a flick is absorbed, so a project can't be skipped.
+  // After the last project the page scrolls normally into About and Contact.
+  const GESTURE_GAP = 220;    // ms of quiet wheel input that ends a gesture
+  const SWIPE_MIN = 24;       // px a finger must travel to count as a swipe
   const restOf = (zoneEnd, holdEnd) => zoneEnd + (holdEnd - zoneEnd) / 2;   // middle of a still stretch
-  function zones() {
-    // [start, end, rest before, rest after], in screens scrolled
-    const z = [[0, RISE, 0, restOf(RISE, FIRST_SWAP)]];
+  function stops() {
+    // each stop: [start, end] of the still stretch where it shows, and the point it rests at (in screens)
+    const list = [{ a: 0, b: 0.02, rest: 0 }, { a: RISE, b: FIRST_SWAP, rest: restOf(RISE, FIRST_SWAP) }];
     for (let j = 1; j < n; j++) {
-      const a = FIRST_SWAP + (j - 1) * PACE, b = a + SWAP;
+      const b = FIRST_SWAP + (j - 1) * PACE + SWAP;
       const holdEnd = j < n - 1 ? FIRST_SWAP + j * PACE : b + 0.3;
-      z.push([a, b, z[j - 1][3], restOf(b, holdEnd)]);
+      list.push({ a: b, b: holdEnd, rest: restOf(b, holdEnd) });
     }
-    return z;
+    return list;
   }
-  let lastY = window.scrollY, dir = 0, idle = 0, snapping = 0, pointerDown = false;
+  const sNow = () => (window.scrollY - trackTop) / vh;
+  const lastStop = () => stops()[stops().length - 1];
+  // stepping applies from the hero to the last project; going down from the last project is free
+  const steps = (s, dir) => s <= lastStop().b + 0.001 && !(dir > 0 && s >= lastStop().a - 0.001);
+
+  let gliding = 0;
   const easeInOut = (v) => (v < 0.5 ? 4 * v * v * v : 1 - Math.pow(-2 * v + 2, 3) / 2);
-  function glideTo(y) {
-    if (reduceMotion) { window.scrollTo(0, y); return; }
-    const y0 = window.scrollY, d = y - y0;
-    const dur = Math.max(450, Math.min(900, Math.abs(d) * 0.7));
+  function glideTo(target) {
+    const y1 = Math.round(trackTop + target * vh);
+    if (reduceMotion) { window.scrollTo(0, y1); return; }
+    const y0 = window.scrollY, d = y1 - y0;
+    const dur = Math.max(500, Math.min(950, Math.abs(d) * 0.75));
     const t0 = performance.now();
-    const id = ++snapping;
-    const step = (now) => {
-      if (snapping !== id) return;                       // the user took over
+    const id = ++gliding;
+    const frame = (now) => {
+      if (gliding !== id) return;                        // something else took over
       const k = Math.min(1, (now - t0) / dur);
       window.scrollTo(0, y0 + d * easeInOut(k));
-      if (k < 1) requestAnimationFrame(step); else snapping = 0;
+      if (k < 1) requestAnimationFrame(frame); else gliding = 0;
     };
-    requestAnimationFrame(step);
+    requestAnimationFrame(frame);
   }
-  function magnet() {
-    if (pointerDown) return;
-    const s = (window.scrollY - trackTop) / vh;
-    const z = zones().find(([a, b]) => s > a + 0.002 && s < b - 0.002);
-    if (!z) return;                                       // resting already, or past the projects
-    const [a, b, before, after] = z;
-    const p = (s - a) / (b - a);
-    const target = dir >= 0 ? (p > COMMIT ? after : before) : (p < 1 - COMMIT ? before : after);
-    glideTo(Math.round(trackTop + target * vh));
+  // where one step from the current position leads
+  function nextStop(s, dir) {
+    const list = stops();
+    const k = list.findIndex((t) => s >= t.a - 0.01 && s <= t.b + 0.01);
+    if (k >= 0) { const t = list[k + dir]; return t ? t.rest : null; }
+    // part-way between two stops: the one in the direction of travel
+    const t = dir > 0 ? list.find((x) => x.rest > s) : [...list].reverse().find((x) => x.rest < s);
+    return t ? t.rest : null;
   }
-  window.addEventListener('scroll', () => {
-    const y = window.scrollY;
-    if (!snapping && y !== lastY) dir = y > lastY ? 1 : -1;
-    lastY = y;
-    clearTimeout(idle);
-    if (!snapping) idle = setTimeout(magnet, SNAP_IDLE);
+  // arriving from outside (scrolling up from About): settle on the stop at hand, don't skip past it
+  function arrivalStop(s, dir) {
+    const list = stops();
+    const t = dir < 0 ? [...list].reverse().find((x) => x.rest <= s + 0.01) : list.find((x) => x.rest >= s - 0.01);
+    return t ? t.rest : null;
+  }
+  function moveOneStop(dir, arriving) {
+    const s = sNow();
+    const target = arriving ? arrivalStop(s, dir) : nextStop(s, dir);
+    if (target !== null && Math.abs(target - s) > 0.002) glideTo(target);
+  }
+
+  // wheel and trackpad
+  let gestureOn = false, quiet = 0, lastFree = 0;
+  window.addEventListener('wheel', (e) => {
+    if (e.ctrlKey || Math.abs(e.deltaY) < Math.abs(e.deltaX) || !e.deltaY) return;
+    const dir = e.deltaY > 0 ? 1 : -1;
+    const now = performance.now();
+    if (gestureOn) {
+      // the rest of a flick that already moved one stop, or its momentum: absorb it,
+      // even once it has arrived at the last project
+      e.preventDefault();
+      clearTimeout(quiet);
+      quiet = setTimeout(() => { gestureOn = false; }, GESTURE_GAP);
+      return;
+    }
+    if (!steps(sNow(), dir)) { lastFree = now; gliding = 0; return; }   // ordinary scrolling
+    e.preventDefault();
+    clearTimeout(quiet);
+    quiet = setTimeout(() => { gestureOn = false; }, GESTURE_GAP);
+    gestureOn = true;
+    moveOneStop(dir, now - lastFree < GESTURE_GAP);
+  }, { passive: false });
+
+  // keys
+  window.addEventListener('keydown', (e) => {
+    const t = e.target;
+    if (e.metaKey || e.ctrlKey || e.altKey || (t && (t.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName)))) return;
+    const dir = { ArrowDown: 1, PageDown: 1, ArrowUp: -1, PageUp: -1, ' ': e.shiftKey ? -1 : 1 }[e.key];
+    if (!dir || !steps(sNow(), dir)) return;
+    e.preventDefault();
+    if (!gliding) moveOneStop(dir, false);
+  });
+
+  // touch
+  let touchY = null, touchUsed = false, touchFromOutside = false;
+  window.addEventListener('touchstart', (e) => {
+    touchY = e.touches[0].clientY;
+    touchUsed = false;
+    touchFromOutside = !steps(sNow(), -1);
   }, { passive: true });
-  // any new input from the person stops a glide in progress
-  ['wheel', 'touchstart', 'keydown'].forEach((ev) => window.addEventListener(ev, () => { snapping = 0; }, { passive: true }));
-  window.addEventListener('pointerdown', () => { pointerDown = true; snapping = 0; });
-  window.addEventListener('pointerup', () => { pointerDown = false; clearTimeout(idle); idle = setTimeout(magnet, SNAP_IDLE); });
+  window.addEventListener('touchmove', (e) => {
+    if (touchY === null) return;
+    const dy = touchY - e.touches[0].clientY;
+    const dir = dy > 0 ? 1 : -1;
+    if (!steps(sNow(), dir)) return;                       // ordinary scrolling
+    e.preventDefault();
+    if (!touchUsed && !gliding && Math.abs(dy) > SWIPE_MIN) { touchUsed = true; moveOneStop(dir, touchFromOutside); }
+  }, { passive: false });
+  window.addEventListener('touchend', () => { touchY = null; }, { passive: true });
+
+  // dragging the scrollbar or a fling that ends between stops: settle on the nearest stop
+  let settle = 0, pointerDown = false;
+  const settleNow = () => {
+    if (pointerDown || gliding) return;
+    const s = sNow();
+    if (s > lastStop().b || s < 0) return;
+    const list = stops();
+    if (list.some((t) => s >= t.a - 0.01 && s <= t.b + 0.01)) return;   // already at a stop
+    const near = list.reduce((m, t) => (Math.abs(t.rest - s) < Math.abs(m.rest - s) ? t : m));
+    glideTo(near.rest);
+  };
+  window.addEventListener('scroll', () => {
+    clearTimeout(settle);
+    if (!gliding) settle = setTimeout(settleNow, 180);
+  }, { passive: true });
+  window.addEventListener('pointerdown', () => { pointerDown = true; gliding = 0; });
+  window.addEventListener('pointerup', () => { pointerDown = false; clearTimeout(settle); settle = setTimeout(settleNow, 180); });
 
   let ticking = false;
   const onScroll = () => {
