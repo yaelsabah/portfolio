@@ -231,6 +231,59 @@
   caption.addEventListener('focusin', () => openDrawer(true));
   caption.addEventListener('focusout', () => openDrawer(false));
 
+  // ---- Magnet: after scrolling stops part-way between two resting states (the hero, or a
+  // project filling the screen), glide on to the next one in the direction of travel ----
+  const SNAP_IDLE = 150;     // ms without scrolling before the magnet pulls
+  const COMMIT = 0.03;       // share of a transition the user must scroll before it carries on
+  const restOf = (zoneEnd, holdEnd) => zoneEnd + (holdEnd - zoneEnd) / 2;   // middle of a still stretch
+  function zones() {
+    // [start, end, rest before, rest after], in screens scrolled
+    const z = [[0, RISE, 0, restOf(RISE, FIRST_SWAP)]];
+    for (let j = 1; j < n; j++) {
+      const a = FIRST_SWAP + (j - 1) * PACE, b = a + SWAP;
+      const holdEnd = j < n - 1 ? FIRST_SWAP + j * PACE : b + 0.3;
+      z.push([a, b, z[j - 1][3], restOf(b, holdEnd)]);
+    }
+    return z;
+  }
+  let lastY = window.scrollY, dir = 0, idle = 0, snapping = 0, pointerDown = false;
+  const easeInOut = (v) => (v < 0.5 ? 4 * v * v * v : 1 - Math.pow(-2 * v + 2, 3) / 2);
+  function glideTo(y) {
+    if (reduceMotion) { window.scrollTo(0, y); return; }
+    const y0 = window.scrollY, d = y - y0;
+    const dur = Math.max(450, Math.min(900, Math.abs(d) * 0.7));
+    const t0 = performance.now();
+    const id = ++snapping;
+    const step = (now) => {
+      if (snapping !== id) return;                       // the user took over
+      const k = Math.min(1, (now - t0) / dur);
+      window.scrollTo(0, y0 + d * easeInOut(k));
+      if (k < 1) requestAnimationFrame(step); else snapping = 0;
+    };
+    requestAnimationFrame(step);
+  }
+  function magnet() {
+    if (pointerDown) return;
+    const s = (window.scrollY - trackTop) / vh;
+    const z = zones().find(([a, b]) => s > a + 0.002 && s < b - 0.002);
+    if (!z) return;                                       // resting already, or past the projects
+    const [a, b, before, after] = z;
+    const p = (s - a) / (b - a);
+    const target = dir >= 0 ? (p > COMMIT ? after : before) : (p < 1 - COMMIT ? before : after);
+    glideTo(Math.round(trackTop + target * vh));
+  }
+  window.addEventListener('scroll', () => {
+    const y = window.scrollY;
+    if (!snapping && y !== lastY) dir = y > lastY ? 1 : -1;
+    lastY = y;
+    clearTimeout(idle);
+    if (!snapping) idle = setTimeout(magnet, SNAP_IDLE);
+  }, { passive: true });
+  // any new input from the person stops a glide in progress
+  ['wheel', 'touchstart', 'keydown'].forEach((ev) => window.addEventListener(ev, () => { snapping = 0; }, { passive: true }));
+  window.addEventListener('pointerdown', () => { pointerDown = true; snapping = 0; });
+  window.addEventListener('pointerup', () => { pointerDown = false; clearTimeout(idle); idle = setTimeout(magnet, SNAP_IDLE); });
+
   let ticking = false;
   const onScroll = () => {
     if (ticking) return;

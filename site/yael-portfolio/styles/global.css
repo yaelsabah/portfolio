@@ -105,16 +105,19 @@ button:focus-visible {
 .cta {
   display: inline-flex;
   align-items: center;
-  min-height: 44px;
-  padding: 0 20px;
-  border-radius: var(--r-pill);
+  gap: 14px;
+  min-height: 48px;
+  padding: 0 18px 0 22px;
+  border-radius: 2px;              /* a rectangle, not a pill */
   background: var(--ink);
   color: var(--ground);
   font-size: 16px;
   text-decoration: none;
-  transition: transform .3s ease, opacity .3s ease;
+  transition: background-color .3s ease, opacity .3s ease;
 }
-.cta:hover { transform: translateY(-1px); opacity: .86; color: var(--ground); }
+.cta-arrow { flex: none; transition: transform .4s var(--ease-out); }
+.cta:hover { background: #2B2B2B; color: var(--ground); }
+.cta:hover .cta-arrow { transform: translateX(4px); }
 
 .text-button {
   background: none;

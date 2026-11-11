@@ -72,19 +72,30 @@
   align-items: center;
   gap: 20px;
   padding: 28px var(--card-inset, var(--gutter)) 32px;
+  opacity: 0;
+  pointer-events: none;
+}
+/* the glass only appears while the drawer is open (on hover) */
+.work-caption::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
   background: var(--header-bg);
   -webkit-backdrop-filter: var(--blur);
   backdrop-filter: var(--blur);
   box-shadow: inset 0 1px 0 rgba(17, 17, 17, 0.06);
   opacity: 0;
-  pointer-events: none;
+  transition: opacity .4s ease;
 }
+.work-caption.is-open::before { opacity: 1; }
 .work-caption .work-link { flex: none; }
 .work-caption-text { display: flex; flex-direction: column; min-width: 0; }
 .work-name { font-size: clamp(30px, 3.6vw, 56px); line-height: 1; font-weight: 500; letter-spacing: -0.03em; }
 
-/* The drawer shows the project name and the button. Hovering it or the project image
-   (home.js adds .is-open) grows it upward over the image to show the number and the intro. */
+/* The caption shows the project name and the button. Hovering it or the project image
+   (home.js adds .is-open) brings in the glass and grows it upward over the image to show
+   the number and the intro. */
 .work-more {
   display: grid;
   grid-template-rows: 0fr;
