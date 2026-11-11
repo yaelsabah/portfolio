@@ -171,6 +171,8 @@
     const capOpacity = clamp((e0 - 0.8) / 0.2) * (1 - bump);
     caption.style.opacity = capOpacity.toFixed(3);
     caption.style.pointerEvents = capOpacity > 0.5 ? 'auto' : 'none';
+    caption._capOpacity = capOpacity;
+    const capChanged = cur !== current;
     if (cur !== current) {
       current = cur;
       const p = projects[cur];
@@ -179,6 +181,8 @@
       capDesc.textContent = p.outcome;
       capLink.href = window.caseStudyUrl(p.slug);
     }
+    // home-reveals.js plays the caption's text reveal from this
+    caption.dispatchEvent(new CustomEvent('captionupdate', { detail: { opacity: capOpacity, changed: capChanged } }));
 
     // highlight the section in view
     const y = window.scrollY;
