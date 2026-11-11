@@ -81,6 +81,11 @@
     vw = document.documentElement.clientWidth;
     vh = stage.clientHeight || window.innerHeight;
     headH = header.offsetHeight;
+    // phones, before scrolling: how far left the menu moves so its first word lines up with the page edge
+    const nav = header.querySelector('.site-nav');
+    const first = nav.querySelector('.nav-link');
+    const shift = parseFloat(getComputedStyle(header).paddingLeft) - (nav.offsetLeft + parseFloat(getComputedStyle(first).paddingLeft));
+    header.style.setProperty('--nav-shift', shift.toFixed(1) + 'px');
     if (vw < PHONE_BREAKPOINT) {
       // phones show the whole caption under the image: room for the tallest one
       const probe = caption.cloneNode(true);
@@ -109,6 +114,8 @@
   function update() {
     const s = Math.max(0, (window.scrollY - trackTop) / vh);
     const phone = vw < PHONE_BREAKPOINT;
+    // phones: the header changes once the page starts scrolling (styles/global.css)
+    header.classList.toggle('is-top', phone && window.scrollY < 4);
 
     // geometry: cards keep the screenshot ratio on every screen.
     // Desktop: the full-size card fits between the header and the caption strip.
@@ -428,8 +435,11 @@
     requestAnimationFrame(() => { ticking = false; update(); });
   };
 
+  // the header starts in place, without sliding, wherever the page opens
+  header.classList.add('no-motion');
   measure();
   update();
+  requestAnimationFrame(() => requestAnimationFrame(() => header.classList.remove('no-motion')));
   window.addEventListener('scroll', onScroll, { passive: true });
   window.addEventListener('resize', () => { measure(); update(); });
   // fonts can shift layout once they load
