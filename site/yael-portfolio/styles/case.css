@@ -599,6 +599,8 @@
   transition: opacity .6s ease, transform .7s var(--ease-out);
 }
 .chapter-media .annot .annot-layer.is-on { opacity: 1; transform: none; }
+/* the notes are dark ink on a transparent layer: in dark mode they turn light */
+[data-theme="dark"] .chapter-media .annot .annot-layer { filter: invert(1) hue-rotate(180deg); }
 @media (prefers-reduced-motion: reduce) { .chapter-media .annot .annot-layer { transition: none; transform: none; } }
 
 /* ---------- Pinned scene (The verdict > Capabilities breakdown) ---------- */

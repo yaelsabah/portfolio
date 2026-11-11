@@ -120,7 +120,7 @@ window.PROJECTS = [
     crops: ['70% 30%', '70% 60%'],
     mobileFocus: '70% 0%',
     // the head image is the laptop composed in Figma (Hero frame), so it sits bare on the page ground
-    hero: 'assets/images/checklist/hero.png',
+    hero: 'assets/images/checklist/hero.webp',
     heroAspect: '1344 / 886',
     heroBg: 'var(--ground)',
     heroAlt: 'The MyHeritage family tree on a laptop, with the improved Checklist panel beside the tree',
@@ -165,7 +165,7 @@ window.PROJECTS = [
         line: 'If users get valuable matches early, they’ll add more to their tree, and a bigger tree brings even more matches. We called this loop the ‘Value Moments’ flywheel.',
         lineBelow: true,
         sections: [
-          { media: { src: 'assets/images/checklist/flywheel-v2.png', wide: true, bare: true,
+          { media: { src: 'assets/images/checklist/flywheel-v2.webp', wide: true, bare: true,
                      alt: 'The Value Moments flywheel, a loop that compounds, in three steps. 1, Acquire data: help users easily add more data to their tree. 2, Compute: use the user’s data and MyHeritage data to create quality matches and other objects. 3, Utilize: help users use and benefit from MyHeritage data. MyHeritage’s matching engine handles Compute; our job was to move the two steps users own: Acquire and Utilize.' } },
           { title: 'Four ideas to get the wheel turning',
             boldLead: true,
@@ -262,7 +262,7 @@ window.PROJECTS = [
     // which part of the screenshot to keep on phones, where cards are cropped taller
     mobileFocus: '45% 0%',
     // the head image is composed in Figma (a laptop over a photograph), so it fills the frame
-    hero: 'assets/images/minuteful/r-hero.jpg',
+    hero: 'assets/images/minuteful/r-hero.webp',
     // the laptop sits straight on the page: no card, hairline or shadow around the head image
     heroBg: 'var(--ground)',
     heroAlt: 'The Minuteful for Wound Portal sign-in screen on a laptop, set on a photograph',
@@ -284,7 +284,7 @@ window.PROJECTS = [
         ] } } },
       { title: 'The User Management Panel',
         body: ['The User Management Panel is designed to support the administrative responsibilities of senior nurses, whose roles extend far beyond clinical duties. Our research showed that a senior nurse is responsible not only for patient care, but also for managing the nursing team, coordinating workflows, overseeing supplies and managing the users of the portal.'],
-        media: { src: 'assets/images/minuteful/r-panel.jpg', wide: true, bare: true, alt: 'The user management list in the admin panel, on a laptop' } },
+        media: { src: 'assets/images/minuteful/r-panel.webp', wide: true, bare: true, alt: 'The user management list in the admin panel, on a laptop' } },
       { statement: 'To support the administrative workflow of senior nurses, we added the ability to create new users. It lets senior nurses assign clinical roles and manage each user’s access and permissions.' },
       { title: 'The Screen: adding new user',
         line: 'We had to make two things clear:',
@@ -301,7 +301,9 @@ window.PROJECTS = [
               { src: 'assets/images/minuteful/r-flow-5.jpg', alt: 'Add new user, step 5' }
             ] } } },
           { line: 'We ended up with two design directions, which we then tested and validated to find the best solution',
-            media: { full: true, bare: true, annotated: { base: 'assets/images/minuteful/r-directions-base.png', layers: [
+            media: { full: true, bare: true, annotated: { base: 'assets/images/minuteful/r-directions-base.webp', layers: [
+              // the "Option 1" and "Option 2" labels, on their own layer so they can turn light in dark mode
+              { src: 'assets/images/minuteful/r-directions-labels.webp', at: 0 },
               { src: 'assets/images/minuteful/r-directions-a1.png', at: 0.307 },
               { src: 'assets/images/minuteful/r-directions-a2.png', at: 0.434 },
               { src: 'assets/images/minuteful/r-directions-a3.png', at: 0.671 },
@@ -309,7 +311,7 @@ window.PROJECTS = [
             ] }, alt: 'Option 1 with authorized and view-only users, and option 2 with scanner and non-scanner users, next to the four questions we wanted to validate: should we specify which clinical roles are in each permission level, should we explain the capabilities, is the term scanner clear enough, and have we accounted for all the roles in the clinic' } },
           { title: 'We conducted usability testing',
             body: ['We took a thorough approach to testing our design, not only to validate or rule out our assumptions but also to gather new insights from our users. Because our users are far from us, we used Figma’s prototyping tool and Zoom’s screen sharing to run remote usability sessions.'],
-            media: { src: 'assets/images/minuteful/r-usability.png', bare: true, alt: 'A remote usability session on Zoom, with the add new user prototype shown on a phone-sized window' } },
+            media: { src: 'assets/images/minuteful/r-usability.webp', bare: true, alt: 'A remote usability session on Zoom, with the add new user prototype shown on a phone-sized window' } },
           { title: 'What we took from it',
             points: ['We realized we needed to give greater clarity about what each clinical role is allowed to do.',
                      'We saw how important it is to let users compare all roles at once. It helps administrators make more informed decisions when assigning roles, because they can fully understand the differences between the permissions.',
@@ -322,11 +324,11 @@ window.PROJECTS = [
                   body: "It turned out that option 2 gave the nurses greater clarity and more confidence when adding new users to Minuteful for Wound. The design was more intuitive, which made it easier for senior nurses to understand and manage user roles and permissions. It streamlined the process and improved their overall experience.",
                   // where the frame sits on the small page, as a share of its height
                   frame: { y: 0, h: 0.5113 },
-                  media: { src: 'assets/images/minuteful/r-verdict.png', alt: "Add new user form with option 2, scanner and non-scanner permission types" } },
+                  media: { src: 'assets/images/minuteful/r-verdict.webp', alt: "Add new user form with option 2, scanner and non-scanner permission types" } },
                 { title: "Capabilities breakdown",
                   body: "Testing showed that nurses wanted to compare roles in one place. We drew inspiration from pricing comparison pages, where plans are clearly explained and compared side by side. We applied the same principle, so administrators can compare the capabilities of different clinical roles at a glance and assign the most suitable permissions for their team.",
                   frame: { y: 0.5094, h: 0.4937 },
-                  media: { src: 'assets/images/minuteful/r-capabilities.png', alt: "Capabilities breakdown table comparing what each clinical role can do" } }
+                  media: { src: 'assets/images/minuteful/r-capabilities.webp', alt: "Capabilities breakdown table comparing what each clinical role can do" } }
               ] } }
         ] }
     ]
