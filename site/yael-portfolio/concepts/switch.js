@@ -2,17 +2,18 @@
 // between the current homepage and the three homepage concepts.
 // On the concept pages it always shows. On the real homepage it only shows on your own
 // computer or after adding ?preview to the address, so visitors never see it.
-// To remove: delete the concepts folder, concept-a/b/c.html and this script's tag in index.html.
+// To remove: delete the concepts folder, concept-a/b/c.html, refined.html and this script's tag in index.html.
 (() => {
   if (window.name === 'device-preview-frame') return;   // not inside the phone preview frame
   const PAGES = [
     ['index.html', 'Current'],
+    ['refined.html', 'Refined'],
     ['concept-a.html', 'A · Editorial'],
     ['concept-b.html', 'B · Quiet'],
     ['concept-c.html', 'C · Playground']
   ];
   const file = location.pathname.split('/').pop() || 'index.html';
-  const isConcept = /^concept-/.test(file);
+  const isConcept = /^(concept-|refined)/.test(file);
   if (!isConcept) {
     let on = null;
     try { on = localStorage.getItem('device-preview-enabled'); } catch (e) {}
