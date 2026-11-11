@@ -209,6 +209,9 @@
     padding: 0;
   }
   .work-caption::before { display: none; }
+  /* hero: as large as fits on one line each (the name about 85% of the width, the title edge to edge) */
+  .work-intro h1 { font-size: clamp(54px, 17vw, 84px); }
+  .work-intro p { margin-top: 18px; font-size: calc((100vw - 40px) / 11.2); }
   .work-more, .work-caption.is-open .work-more { grid-template-rows: 1fr; opacity: 1; }
   .work-counter { padding-bottom: 10px; }
   .work-name { font-size: clamp(34px, 10.5vw, 46px); }

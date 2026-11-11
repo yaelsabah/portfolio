@@ -195,8 +195,8 @@
     caption.style.setProperty('--card-inset', ((vw - W1) / 2).toFixed(1) + 'px');
 
     // headline fades and lifts away
-    // phones: the name and title sit in the middle of the screen
-    intro.style.top = (phone ? Math.max(headH, (vh - intro.offsetHeight) / 2) : Math.max(130, vh * 0.26)) + 'px';
+    // phones: the name and title sit a little above the middle of the screen (20% higher than centred)
+    intro.style.top = (phone ? Math.max(headH, ((vh - intro.offsetHeight) / 2) * 0.8) : Math.max(130, vh * 0.26)) + 'px';
     const introVis = reduceMotion ? (s > 0.1 ? 0 : 1) : clamp(1 - s / 0.4);
     intro._vis = introVis;
     if (intro.dataset.reveal) intro.dispatchEvent(new CustomEvent('herovisibility', { detail: introVis }));
