@@ -428,6 +428,18 @@
         wrap.append(note);
       });
       media.append(wrap);
+      // mobileDirections: on phones the diagram is replaced by each option on its own (see styles/refine.css)
+      if (c.media.mobileDirections) {
+        const esc = (t) => String(t).replace(/[&<>"]/g, (m) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[m]));
+        media.classList.add('has-m-chart');
+        const m = document.createElement('div');
+        m.className = 'dirs-m';
+        m.innerHTML = c.media.mobileDirections.map((o) =>
+          '<section class="dm-opt"><h4 class="dm-label">' + esc(o.label) + '</h4>' +
+          '<div class="dm-scroll" tabindex="0" role="group" aria-label="' + esc(o.label) + ', scrolls sideways"><img src="' + o.src + '" alt="' + esc(o.alt) + '" loading="lazy" decoding="async"></div>' +
+          '<ul class="dm-q">' + o.questions.map((q) => '<li>' + esc(q) + '</li>').join('') + '</ul></section>').join('');
+        media.append(m);
+      }
     } else if (c.media.src) {
       if (c.media.wide) node.querySelector('.chapter').classList.add('is-wide');
       media.classList.add('is-composed');

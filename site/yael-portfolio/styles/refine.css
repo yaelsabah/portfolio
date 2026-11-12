@@ -223,3 +223,30 @@ html.rf .case-meta.rf-in > div::before, html.rf .chapter.rf-in::before, html.rf 
   .wm-steps b { display: block; font-size: 17px; line-height: 1.25; font-weight: 600; }
   .wm-steps p { margin: 4px 0 0; font-size: 14px; line-height: 1.45; color: #4B5563; }
 }
+
+/* ---------- the two design directions: each option on its own on phones ---------- */
+.dirs-m { display: none; }
+@media (max-width: 760px) {
+  .chapter-media.has-m-chart > .annot { display: none; }
+  .dirs-m { display: block; }
+  .dm-opt + .dm-opt { margin-top: 44px; }
+  .dm-label { margin: 0 0 12px; font-size: 14px; font-weight: 500; color: var(--muted); }
+  /* the screen is shown at a readable size and swiped sideways; it runs to the screen edge so it is clear there is more */
+  .dm-scroll { margin: 0 calc(var(--gutter) * -1); padding: 6px var(--gutter) 22px; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+  .dm-scroll::-webkit-scrollbar { display: none; }
+  .dm-scroll img { display: block; width: 960px; max-width: none; height: auto; border-radius: 4px;
+    filter: drop-shadow(0 12px 20px rgba(17, 17, 17, 0.14)) drop-shadow(0 1px 3px rgba(17, 17, 17, 0.1)); }
+  :root[data-theme="dark"] .dm-scroll img { filter: drop-shadow(0 12px 20px rgba(0, 0, 0, 0.5)) drop-shadow(0 1px 3px rgba(0, 0, 0, 0.4)); }
+  .dm-q { list-style: none; margin: 0; padding: 0; }
+  .dm-q li { position: relative; padding: 14px 0 14px 18px; border-top: 1px solid var(--line); font-size: 17px; line-height: 1.4; color: var(--ink); }
+  .dm-q li::before { content: ''; position: absolute; left: 0; top: 24px; width: 6px; height: 6px; border-radius: 50%; background: var(--signal); }
+}
+
+/* phones: less space between a paragraph and the image under it */
+@media (max-width: 760px) {
+  .chapter-body { row-gap: 22px; }
+  .chapter.is-wide .chapter-body { gap: 22px; }
+  .chapter.is-sub .chapter-body { padding-top: 12px; }
+  .chapter.is-sub.is-full .chapter-body { padding-top: 16px; }
+  .chapter.is-sub.is-full:has(.chapter-media.is-strip) .chapter-body { padding-top: 16px; }
+}

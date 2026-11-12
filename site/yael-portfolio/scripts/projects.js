@@ -322,7 +322,15 @@ window.PROJECTS = [
               { src: 'assets/images/minuteful/r-flow-5.jpg', alt: 'Add new user, step 5' }
             ] } } },
           { line: 'We ended up with two design directions, which we then tested and validated to find the best solution',
-            media: { full: true, bare: true, annotated: { base: 'assets/images/minuteful/r-directions-base.webp', layers: [
+            media: { full: true, bare: true,
+                     // phones: each option on its own, large enough to read when swiped sideways, with its questions as text underneath
+                     mobileDirections: [
+                       { label: 'Option 1', src: 'assets/images/minuteful/r-directions-option1.webp', alt: 'Option 1: authorized and view-only users, then six clinical roles with the capabilities of each',
+                         questions: ['Should we specify which clinical roles are included in each permission level?', 'Should we provide additional explanations about the capabilities?'] },
+                       { label: 'Option 2', src: 'assets/images/minuteful/r-directions-option2.webp', alt: 'Option 2: scanner and non-scanner users, then six clinical roles with the capabilities of each',
+                         questions: ['Should we use the term ‘scanner’? Is it clear enough?', 'Have we accounted for all the roles within the clinic’s ecosystem?'] }
+                     ],
+                     annotated: { base: 'assets/images/minuteful/r-directions-base.webp', layers: [
               // the "Option 1" and "Option 2" labels, on their own layer so they can turn light in dark mode
               { src: 'assets/images/minuteful/r-directions-labels.webp', at: 0 },
               { src: 'assets/images/minuteful/r-directions-a1.png', at: 0.307 },
