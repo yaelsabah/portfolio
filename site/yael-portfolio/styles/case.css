@@ -666,3 +666,9 @@
 .overlay-wrap { position: relative; line-height: 0; }
 .chapter-media.is-composed .overlay-wrap > img:first-child { display: block; width: 100%; height: auto; }
 .chapter-media.is-composed .overlay-wrap > img.overlay-gif { position: absolute; inset: auto; display: block; max-width: none; margin: 0; border-radius: 0; box-shadow: none; }
+
+/* the lead, chapters and impact start as template text; keep them hidden until case.js has filled them in,
+   so a slow or failed script never shows the [placeholders] */
+html:not(.case-ready) .case-lead,
+html:not(.case-ready) .case-chapters,
+html:not(.case-ready) .case-impact { visibility: hidden; }

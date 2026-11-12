@@ -708,4 +708,6 @@
     document.documentElement.classList.add('has-reveal');
     targets.forEach((el) => { el.classList.add('reveal'); io.observe(el); });
   }
+  // the page is built: show the sections that hold template text until now
+  document.documentElement.classList.add('case-ready');
 })();
