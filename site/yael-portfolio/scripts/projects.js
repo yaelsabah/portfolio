@@ -181,7 +181,7 @@ window.PROJECTS = [
                      { text: 'Guide. Show users where their matches are and how Record Matches, Smart Matches and Instant Discoveries differ.', tag: 'Drives step 3 · Utilize' },
                      { text: 'Direct. Show users what to do next and how it leads to valuable matches.', tag: 'Closes the loop · back to step 1' }] }
         ] },
-      { title: 'The Checklist: four guided steps to a first match',
+      { title: 'The Checklist: four principles that keep users moving',
         subGap: 55,
         sections: [
           { title: 'Little wins, from the first second',
