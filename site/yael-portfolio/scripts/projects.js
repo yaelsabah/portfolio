@@ -95,11 +95,11 @@ window.PROJECTS = [
             body: ['Many people keep a photo of each printed family picture on their phone, so their collection is already in their pocket. That makes the phone a natural place to create a Life Tribute, not only the computer.'],
             media: { phone: 'assets/images/design-mobile-device.png', video: 'assets/video/mobile-recording.mp4', src: 'assets/images/design-mobile.jpg', alt: 'The mobile web version of the Add cover text step, on a phone' } },
           { media: { full: true, phones: { frame: 'assets/images/design-mobile-device.png', screens: [
-            { src: 'assets/images/design-m-1.jpg', alt: 'Mobile web screen 1 of 6' },
-            { src: 'assets/images/design-m-2.jpg', alt: 'Mobile web screen 2 of 6' },
-            { src: 'assets/images/design-m-3.jpg', alt: 'Mobile web screen 3 of 6: adding cover text' },
-            { src: 'assets/images/design-m-4.jpg', alt: 'Mobile web screen 4 of 6' },
-            { src: 'assets/images/design-m-5.jpg', alt: 'Mobile web screen 5 of 6' },
+            { src: 'assets/images/design-m-1-2x.webp', alt: 'Mobile web screen 1 of 6' },
+            { src: 'assets/images/design-m-2-2x.webp', alt: 'Mobile web screen 2 of 6' },
+            { src: 'assets/images/design-m-3-2x.webp', alt: 'Mobile web screen 3 of 6: adding cover text' },
+            { src: 'assets/images/design-m-4-2x.webp', alt: 'Mobile web screen 4 of 6' },
+            { src: 'assets/images/design-m-5-2x.webp', alt: 'Mobile web screen 5 of 6' },
             { src: 'assets/images/design-m-6.jpg?v=2', alt: 'Mobile web screen 6 of 6' }
           ] } } }
         ] }
