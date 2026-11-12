@@ -427,7 +427,9 @@
         c.media.overlays.forEach((o) => {
           const g = document.createElement('img');
           g.className = 'overlay-gif';
-          g.src = o.src;
+          // a gif with a delay (ms) starts that long after the others; all of them start when the image scrolls into view
+          g.dataset.src = o.src;
+          g.dataset.delay = o.delay || 0;
           g.alt = '';
           g.decoding = 'async';
           g.style.left = o.x + '%';
@@ -437,6 +439,14 @@
           wrap.append(g);
         });
         media.append(wrap);
+        const start = () => wrap.querySelectorAll('.overlay-gif').forEach((g) => {
+          const go = () => { g.src = g.dataset.src; };
+          +g.dataset.delay ? setTimeout(go, +g.dataset.delay) : go();
+        });
+        if ('IntersectionObserver' in window) {
+          const io = new IntersectionObserver((es) => { if (es[0].isIntersecting) { io.disconnect(); start(); } }, { threshold: 0.25 });
+          io.observe(wrap);
+        } else start();
       } else {
         media.append(img);
       }

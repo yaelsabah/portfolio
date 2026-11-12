@@ -196,7 +196,7 @@ window.PROJECTS = [
                      alt: 'Three explainer modals: What are Smart Matches™, What are Record Matches, and What are Instant Discoveries™, each with a short looping animation.',
                      overlays: [
                           { src: 'assets/images/checklist/modal-smart-matches.gif', x: 4.345, y: 42.884, w: 27.798, h: 26.248 },
-                          { src: 'assets/images/checklist/modal-record-matches.gif', x: 36.131, y: 42.884, w: 27.798, h: 26.248 },
+                          { src: 'assets/images/checklist/modal-record-matches.gif', delay: 2000, x: 36.131, y: 42.884, w: 27.798, h: 26.248 },
                           { src: 'assets/images/checklist/modal-instant-discoveries.gif', x: 67.917, y: 43.438, w: 27.798, h: 26.248 }
                      ] } },
           { title: 'Incentive: a clear reward at the end',
