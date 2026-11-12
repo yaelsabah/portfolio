@@ -122,7 +122,7 @@ window.PROJECTS = [
     crops: ['70% 30%', '70% 60%'],
     mobileFocus: '70% 0%',
     // the head image is the laptop composed in Figma (Hero frame), so it sits bare on the page ground
-    hero: 'assets/images/checklist/hero.webp',
+    hero: 'assets/images/checklist/hero-2x.webp',
     heroAspect: '1344 / 886',
     heroBg: 'var(--ground)',
     heroAlt: 'The MyHeritage family tree on a laptop, with the improved Checklist panel beside the tree',
