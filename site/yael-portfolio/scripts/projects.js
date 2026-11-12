@@ -130,6 +130,8 @@ window.PROJECTS = [
     team: false,
     impactSection: false,
     lead: 'Only 3 in 10 people who finish onboarding go on to add another relative. The Checklist shows them what to do next.',
+    // a short paragraph of context under the opening statement
+    intro: 'MyHeritage is a family history platform that helps people discover where they come from. Anyone can build their own family tree on it, adding relatives and the details of their lives, and MyHeritage then looks for matches in its records and in other members’ trees.',
     // Story follows the Checklist case study in Figma (Case studies file, Case study / The Checklist – edited).
     chapters: [
       { title: 'The problem',
