@@ -121,11 +121,10 @@ window.PROJECTS = [
     alt: 'The Checklist panel in the MyHeritage family tree, with a progress bar and the next steps to take',
     crops: ['70% 30%', '70% 60%'],
     mobileFocus: '70% 0%',
-    // the head image is the laptop composed in Figma (Hero frame), so it sits bare on the page ground
-    hero: 'assets/images/checklist/hero-2x.webp',
-    heroAspect: '1344 / 886',
-    heroBg: 'var(--ground)',
-    heroAlt: 'The MyHeritage family tree on a laptop, with the improved Checklist panel beside the tree',
+    // the head image is the product screen exported from Figma at 2x (white edge, so it sits in a card)
+    hero: 'assets/images/checklist/hero-screen.webp',
+    heroAspect: '2960 / 1832',
+    heroAlt: 'The MyHeritage family tree with the improved Checklist panel beside the tree',
     chaptersTitle: false,
     team: false,
     impactSection: false,
