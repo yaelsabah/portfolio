@@ -120,3 +120,52 @@ html.rf .case-meta.rf-in > div::before, html.rf .chapter.rf-in::before, html.rf 
   .case-hero.is-full .case-shot, .chapter-media.is-composed.is-bare, .chapter-media.is-device, .chapter-media.is-phone,
   .chapter-media.is-phones, .chapter-media.is-device video { border-radius: 0; }
 }
+
+/* phones: a head image with empty margins (Life Tribute) is enlarged and spreads to the screen edges */
+@media (max-width: 760px) {
+  .case-hero.has-phone-crop { margin-left: calc(var(--gutter) * -1); margin-right: calc(var(--gutter) * -1); aspect-ratio: var(--hp-aspect); border-radius: 0; }
+  .case-hero.has-phone-crop.is-full .case-shot { width: var(--hp-w); height: auto; left: var(--hp-left); top: var(--hp-top); object-fit: fill; }
+}
+
+/* phones: tighter space between chapters and sections */
+@media (max-width: 760px) {
+  .case-hero.has-phone-crop { margin-top: 24px; }
+  .case-hero.has-phone-crop + .case-meta { margin-top: 10px; }
+  .case-lead { margin-top: 72px; }
+  .case-chapters { margin-top: 88px; }
+  .case-chapters.is-continued { margin-top: 72px; }
+  .chapter { padding-top: 40px; padding-bottom: 44px; }
+  .chapter.is-sub { padding-top: 40px; }
+  .chapter.has-subs + .chapter.is-sub { padding-top: 36px; }
+  .chapter.is-title-only + .chapter.is-sub { padding-top: 0; }
+  .chapter.is-sub.is-last { padding-bottom: 44px; }
+  .chapter.is-scene { padding-top: 56px; }
+  .project-nav { margin-top: 40px; }
+  .scene.is-static .scene-shot:last-child { margin-bottom: 0; }
+  .project-link { padding: 32px 0 40px; }
+}
+
+/* phones: a single phone mockup sits in the middle of the page */
+@media (max-width: 760px) {
+  .chapter-media.is-phone { width: min(100%, 320px); margin-left: auto; margin-right: auto; justify-self: center; }
+  .chapter-media.is-narrow { width: min(100%, 375px); margin-left: auto; margin-right: auto; justify-self: center; }
+}
+
+/* phones: the line under a chapter title runs the full width, so a short sentence stays on one line */
+@media (max-width: 760px) {
+  .chapter.has-subtitle .chapter-head .chapter-line { grid-column: 1 / -1; font-size: 20px; }
+}
+
+/* phones: the scene's two screens (The verdict, Capabilities breakdown) have the same width and the same shadow */
+.scene.is-static .scene-shot.is-flat {
+  width: 100%; height: auto; border-radius: 4px;
+  filter: drop-shadow(0 14px 22px rgba(17, 17, 17, 0.14)) drop-shadow(0 1px 3px rgba(17, 17, 17, 0.1));
+}
+:root[data-theme="dark"] .scene.is-static .scene-shot.is-flat { filter: drop-shadow(0 14px 22px rgba(0, 0, 0, 0.5)) drop-shadow(0 1px 3px rgba(0, 0, 0, 0.4)); }
+/* phones: no pinning, so the pull-up that belongs to the pinned layout is dropped and the scene follows the other sections */
+.scene.is-static { margin-top: 0; }
+@media (max-width: 760px) {
+  .chapter.is-scene { padding-top: 40px; }
+  /* swiping is enough on a touch screen: no arrow buttons on the sideways strips */
+  .strip-arrow { display: none; }
+}

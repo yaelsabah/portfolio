@@ -29,6 +29,15 @@
     // a head image that is not 16:9 sets its own proportions so nothing is cropped
     if (p.heroAspect) document.querySelector('.case-hero').style.aspectRatio = p.heroAspect;
     // a head image on a transparent background sits on this colour
+    // heroPhone: how a head image with empty margins is cropped and enlarged on phones
+    if (p.heroPhone) {
+      const hero = document.querySelector('.case-hero');
+      hero.classList.add('has-phone-crop');
+      hero.style.setProperty('--hp-aspect', p.heroPhone.aspect);
+      hero.style.setProperty('--hp-w', p.heroPhone.width);
+      hero.style.setProperty('--hp-left', p.heroPhone.left);
+      hero.style.setProperty('--hp-top', p.heroPhone.top);
+    }
     if (p.heroBg) {
       document.querySelector('.case-hero').style.background = p.heroBg;
       document.querySelector('.case-hero').classList.add('is-bare');
@@ -109,6 +118,9 @@
       const img = document.createElement('img');
       img.className = 'scene-shot';
       img.src = st.media.src;
+      img.dataset.full = st.media.src;
+      // flat: the same picture without its soft shadow, used on phones where both screens get the same shadow and width
+      if (st.media.flat) img.dataset.flat = st.media.flat;
       img.alt = st.media.alt || '';
       img.loading = 'lazy';
       img.decoding = 'async';
@@ -662,8 +674,10 @@
         if (still) {
           [...steps, ...shots].forEach((el) => { el.style.opacity = ''; el.style.transform = ''; });
           frame.style.top = ''; frame.style.height = '';
+          shots.forEach((el) => { if (el.dataset.flat) { if (!el.src.endsWith(el.dataset.flat)) el.src = el.dataset.flat; el.classList.add('is-flat'); } });
           return;
         }
+        shots.forEach((el) => { if (el.dataset.full && el.classList.contains('is-flat')) { el.src = el.dataset.full; el.classList.remove('is-flat'); } });
         const rect = sc.getBoundingClientRect();
         const span = Math.max(1, rect.height - window.innerHeight);
         const p = clamp(-rect.top / span);

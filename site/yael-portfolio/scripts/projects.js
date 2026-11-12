@@ -18,6 +18,8 @@ window.PROJECTS = [
     hero: 'assets/images/life-tribute-hero.webp',
     // colour behind the transparent head image: the page background, so the devices sit straight on the page
     heroBg: 'var(--ground)',
+    // phones: the devices are enlarged to nearly the full screen width (the head image has empty margins, so it is shown cropped and bleeds to the screen edges)
+    heroPhone: { aspect: '1.667', width: '113%', left: '-7.9%', top: '-4.6%' },
     heroAlt: 'The Life Tribute landing page on a laptop and a phone, with a wedding photograph, the headline, a Create Life Tribute button and a row of small photographs',
     backdrop: 'assets/images/calendly-backdrop.jpg',
     alt: 'The Life Tribute landing page, with the headline, a Create Life Tribute button and a row of photographs',
@@ -132,7 +134,7 @@ window.PROJECTS = [
     // Story follows the Checklist case study in Figma (Case studies file, Case study / The Checklist – edited).
     chapters: [
       { title: 'MyHeritage’s core product',
-        line: 'The family tree is where everything on MyHeritage starts.',
+        line: 'It all starts with the family tree.',
         lineBelow: true,
         body: ['MyHeritage is a family history platform that helps people discover where they come from. Anyone can build their own family tree on it, adding relatives and the details of their lives.',
                'The tree is the core of the product. MyHeritage looks for matches in its records and in other members’ trees, so the more relatives and facts people add, the more there is to find.'] },
@@ -330,11 +332,11 @@ window.PROJECTS = [
                   body: "It turned out that option 2 gave the nurses greater clarity and more confidence when adding new users to Minuteful for Wound. The design was more intuitive, which made it easier for senior nurses to understand and manage user roles and permissions. It streamlined the process and improved their overall experience.",
                   // where the frame sits on the small page, as a share of its height
                   frame: { y: 0, h: 0.5113 },
-                  media: { src: 'assets/images/minuteful/r-verdict.webp', alt: "Add new user form with option 2, scanner and non-scanner permission types" } },
+                  media: { src: 'assets/images/minuteful/r-verdict.webp', flat: 'assets/images/minuteful/r-verdict-flat.webp', alt: "Add new user form with option 2, scanner and non-scanner permission types" } },
                 { title: "Capabilities breakdown",
                   body: "Testing showed that nurses wanted to compare roles in one place. We drew inspiration from pricing comparison pages, where plans are clearly explained and compared side by side. We applied the same principle, so administrators can compare the capabilities of different clinical roles at a glance and assign the most suitable permissions for their team.",
                   frame: { y: 0.5094, h: 0.4937 },
-                  media: { src: 'assets/images/minuteful/r-capabilities.webp', alt: "Capabilities breakdown table comparing what each clinical role can do" } }
+                  media: { src: 'assets/images/minuteful/r-capabilities.webp', flat: 'assets/images/minuteful/r-capabilities-flat.webp', alt: "Capabilities breakdown table comparing what each clinical role can do" } }
               ] } }
         ] }
     ]
