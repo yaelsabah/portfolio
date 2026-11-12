@@ -239,7 +239,7 @@ html.rf .case-meta.rf-in > div::before, html.rf .chapter.rf-in::before, html.rf 
   :root[data-theme="dark"] .dm-scroll img { filter: drop-shadow(0 12px 20px rgba(0, 0, 0, 0.5)) drop-shadow(0 1px 3px rgba(0, 0, 0, 0.4)); }
   .dm-q { list-style: none; margin: 0; padding: 0; }
   .dm-q li { position: relative; padding: 14px 0 14px 18px; border-top: 1px solid var(--line); font-size: 17px; line-height: 1.4; color: var(--ink); }
-  .dm-q li::before { content: ''; position: absolute; left: 0; top: 24px; width: 6px; height: 6px; border-radius: 50%; background: var(--signal); }
+  .dm-q li::before { content: ''; position: absolute; left: 0; top: 24px; width: 6px; height: 6px; border-radius: 50%; background: var(--ink); }
 }
 
 /* phones: less space between a paragraph and the image under it */
