@@ -328,6 +328,17 @@
         frame.src = c.media.frame;
         frame.alt = '';
         media.append(frame);
+        // a generic browser header across the top of the laptop screen, so the recording reads as a web page
+        const bar = document.createElement('div');
+        bar.className = 'browser-bar';
+        bar.setAttribute('aria-hidden', 'true');
+        bar.innerHTML = '<span class="bb-dots"><i></i><i></i><i></i></span>' +
+          '<span class="bb-nav"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3 5 8l5 5"/></svg>' +
+          '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m6 3 5 5-5 5"/></svg>' +
+          '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M13 8a5 5 0 1 1-1.5-3.5M13 2.5V5h-2.5"/></svg></span>' +
+          '<span class="bb-url"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 1.5a3.2 3.2 0 0 0-3.2 3.2V6.5H4a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-6a1 1 0 0 0-1-1h-.8V4.7A3.2 3.2 0 0 0 8 1.5Zm-1.8 3.2a1.8 1.8 0 1 1 3.6 0V6.5H6.2V4.7Z"/></svg>myheritage.com</span>' +
+          '<span class="bb-more"><i></i><i></i><i></i></span>';
+        media.append(bar);
       }
       const v = document.createElement('video');
       v.src = c.media.video;
