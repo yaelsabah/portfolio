@@ -24,7 +24,7 @@
 .work-intro h1 {
   margin: 0;
   max-width: 20ch;
-  font-size: clamp(51px, 7.5vw, 108px);
+  font-size: clamp(41px, 6vw, 86px);          /* 20% smaller than before */
   font-weight: 600;
   letter-spacing: -0.02em;
   line-height: 1;
@@ -34,7 +34,7 @@
 .hero-pending .work-intro { visibility: hidden; }
 .rv-word { display: inline-block; white-space: nowrap; }
 /* the title under the name, 24px below it */
-.work-intro p { margin: 24px 0 0; font-size: 29px; line-height: 1.15; letter-spacing: -0.01em; color: var(--ink); }
+.work-intro p { margin: 24px 0 0; font-size: 23px; line-height: 1.15; letter-spacing: -0.01em; color: var(--ink); }
 
 .work-card {
   position: absolute;
