@@ -151,9 +151,10 @@ html.rf .case-meta.rf-in > div::before, html.rf .chapter.rf-in::before, html.rf 
   .chapter-media.is-narrow { width: min(100%, 375px); margin-left: auto; margin-right: auto; justify-self: center; }
 }
 
-/* phones: the line under a chapter title runs the full width, so a short sentence stays on one line */
+/* phones: the line under a chapter title lines up with the title (as on desktop); a narrower number column and a slightly smaller size keep short sentences on one line */
 @media (max-width: 760px) {
-  .chapter.has-subtitle .chapter-head .chapter-line { grid-column: 1 / -1; font-size: 20px; }
+  .chapter.has-subtitle .chapter-head .chapter-line { font-size: 20px; }
+  .chapter-head { grid-template-columns: 28px minmax(0, 1fr); column-gap: 8px; }
 }
 
 /* phones: the scene's two screens (The verdict, Capabilities breakdown) have the same width and the same shadow */
@@ -180,11 +181,11 @@ html.rf .case-meta.rf-in > div::before, html.rf .chapter.rf-in::before, html.rf 
     box-shadow: 0 0 0 1px rgba(17, 17, 17, 0.05), 0 14px 28px -14px rgba(17, 17, 17, 0.2);
   }
   .fm-title { margin: 0; font-size: 17px; line-height: 1.25; font-weight: 600; letter-spacing: -0.01em; }
-  .fm-overall { margin-top: 16px; padding: 14px 16px 16px; border-radius: 4px; background: #FDF1EE; }
+  .fm-overall { margin-top: 26px; padding: 14px 16px 16px; border-radius: 4px; background: #FDF1EE; }
   .fm-overall-label { font-size: 12px; color: #C0392B; }
   .fm-overall strong { display: block; margin-top: 2px; font-size: 40px; line-height: 1.05; font-weight: 500; letter-spacing: -0.02em; color: #C0392B; font-variant-numeric: tabular-nums; }
   .fm-overall p { margin: 6px 0 0; font-size: 13px; line-height: 1.4; color: #1F2430; }
-  .fm-steps { list-style: none; margin: 22px 0 0; padding: 0; }
+  .fm-steps { list-style: none; margin: 20px 0 0; padding: 0; }
   .fm-step .fm-label { display: flex; flex-direction: column; font-size: 12px; line-height: 1.3; color: #5B6270; }
   .fm-step .fm-label b { font-size: 14px; font-weight: 600; color: #1F2430; }
   .fm-value { display: flex; align-items: baseline; gap: 8px; margin-top: 6px; }
