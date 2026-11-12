@@ -40,7 +40,9 @@
   const header = $('.site-header');
   const GAP = 28;            // space between the full-size card and the header / caption strip
   const PHONE_SIDE = 16;     // phones: space between the card and the screen edges
-  const CAP_GAP = 32;        // phones: space between the card and the caption under it
+  const CAP_GAP = 32;
+const PHONE_CTA_GAP = 32;   // phones: least space between the intro text and the button
+const PHONE_LOW = 0.8;   // phones: share of the spare room above the cover (0.5 = centred, 1 = resting on the button)        // phones: space between the card and the caption under it
 
   let vw = 0, vh = 0, trackTop = 0, headH = 0, capH = 0, ctaH = 0, current = -1;
 
@@ -128,7 +130,8 @@
       W0 = vw - 56;
       // the image and its text sit in the middle of the space between the header and the button
       const groupH = W1 * A + CAP_GAP + capH;
-      const top = headH + Math.max(gap, (vh - headH - ctaH - gap - groupH) / 2);
+      // the cover sits low on the screen: most of the spare room goes above the image, so the image, text and button read as one block resting at the bottom
+      const top = headH + Math.max(gap, (vh - headH - ctaH - PHONE_CTA_GAP - groupH) * PHONE_LOW);
       cy1 = top + (W1 * A) / 2;
       caption.style.setProperty('--cap-top', (top + W1 * A + CAP_GAP).toFixed(1) + 'px');
     } else {

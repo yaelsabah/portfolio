@@ -107,3 +107,16 @@ html.rf .case-meta.rf-in > div::before, html.rf .chapter.rf-in::before, html.rf 
   html.rf .section::before, html.rf .case-meta > div::before, html.rf .chapter.rf-rule::before, html.rf .project-nav::before { transform: none; }
   .logo-rest { transition: none; }
 }
+
+/* ---------- phones: images have 4px corners ---------- */
+@media (max-width: 700px) {
+  .work-card { border-radius: 4px; }
+  .work-card.is-peek { border-radius: 4px 4px 0 0; }
+}
+@media (max-width: 760px) {
+  .case-hero, .case-shot, .chapter-media, .chapter-media.is-row img, .chapter-media.is-row video,
+  .chapter-media.is-strip img, .chapter-media.is-scroll img, .glimpse, .scene-frame, .scene-thumb, .scene-thumb img,
+  .placeholder { border-radius: 4px; }
+  .case-hero.is-full .case-shot, .chapter-media.is-composed.is-bare, .chapter-media.is-device, .chapter-media.is-phone,
+  .chapter-media.is-phones, .chapter-media.is-device video { border-radius: 0; }
+}
