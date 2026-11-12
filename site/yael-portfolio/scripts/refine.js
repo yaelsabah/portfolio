@@ -42,4 +42,37 @@
   if (next) next.insertAdjacentHTML('beforeend', svg('', 'M1 5.500h8M6 2l3.500 3.500L6 9'));
   const top = document.querySelector('.site-footer .text-button');
   if (top) top.insertAdjacentHTML('beforeend', svg('is-up', 'M5.5 10V2M2 5l3.5-3.5L9 5'));
+
+  // sideways scrolling areas: the first time one comes into view it nudges to the left and back, once, to show there is more
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const scrollers = [...document.querySelectorAll('.chapter-media.is-strip, .chapter-media.is-row, .chapter-media.is-phones, .chapter-media.is-scroll, .dm-scroll')];
+  if (!reduce && scrollers.length && 'IntersectionObserver' in window) {
+    const ease = (t) => (t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2);
+    const nudge = (el) => {
+      const room = el.scrollWidth - el.clientWidth;
+      if (room < 24 || el.scrollLeft > 2) return;
+      const dist = Math.min(56, room * 0.5), OUT = 700, BACK = 800;
+      let stop = false;
+      const cancel = () => { stop = true; el.style.scrollSnapType = ''; };
+      ['pointerdown', 'touchstart', 'wheel', 'keydown'].forEach((ev) => el.addEventListener(ev, cancel, { once: true, passive: true }));
+      el.style.scrollSnapType = 'none';
+      const t0 = performance.now();
+      const tick = (now) => {
+        if (stop) return;
+        const t = now - t0;
+        const x = t < OUT ? ease(t / OUT) * dist : t < OUT + BACK ? (1 - ease((t - OUT) / BACK)) * dist : 0;
+        el.scrollLeft = x;
+        if (t < OUT + BACK) requestAnimationFrame(tick); else { el.scrollLeft = 0; el.style.scrollSnapType = ''; }
+      };
+      requestAnimationFrame(tick);
+    };
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (!e.isIntersecting) return;
+        io.unobserve(e.target);
+        setTimeout(() => nudge(e.target), 500);   // after it has faded in
+      });
+    }, { threshold: 0.6 });
+    scrollers.forEach((el) => io.observe(el));
+  }
 })();
