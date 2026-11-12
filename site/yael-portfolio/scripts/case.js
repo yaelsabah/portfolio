@@ -472,6 +472,21 @@
         } else start();
       } else {
         media.append(img);
+        // wheel: on phones the flywheel picture is swapped for the same diagram rebuilt in HTML (see styles/refine.css)
+        if (c.media.wheel) {
+          const w = c.media.wheel, esc = (t) => String(t).replace(/[&<>"]/g, (m) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[m]));
+          media.classList.add('has-m-chart');
+          const m = document.createElement('div');
+          m.className = 'wheel-m';
+          m.setAttribute('role', 'group');
+          m.setAttribute('aria-label', w.title);
+          m.innerHTML = '<h4 class="wm-title">' + esc(w.title) + '</h4><p class="wm-sub">' + esc(w.subtitle) + '</p>' +
+            '<div class="wm-ring"><img src="assets/images/checklist/flywheel-ring.svg" alt="" loading="lazy">' +
+            '<div class="wm-center"><b>' + esc(w.center.title) + '</b><span>' + esc(w.center.text) + '</span></div>' +
+            '<i class="wm-badge wm-b1">1</i><i class="wm-badge wm-b2">2</i><i class="wm-badge wm-b3">3</i></div>' +
+            '<ol class="wm-steps">' + w.steps.map((st, i) => '<li><i class="wm-badge wm-b' + (i + 1) + '">' + (i + 1) + '</i><div><b>' + esc(st.title) + '</b><p>' + esc(st.text) + '</p></div></li>').join('') + '</ol>';
+          media.append(m);
+        }
         // chart: on phones the picture is swapped for the same chart rebuilt as horizontal bars (see styles/refine.css)
         if (c.media.chart) {
           const ch = c.media.chart, esc = (t) => String(t).replace(/[&<>"]/g, (m) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[m]));

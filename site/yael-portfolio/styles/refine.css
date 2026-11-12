@@ -198,3 +198,28 @@ html.rf .case-meta.rf-in > div::before, html.rf .chapter.rf-in::before, html.rf 
   .fm-step + .fm-drop, .fm-drop + .fm-step { }
   html.rf .funnel-m:not(.is-in) .fm-track i { transform: scaleX(0); }
 }
+
+/* ---------- the flywheel: stacked for phones (the picture is used on larger screens) ---------- */
+.wheel-m { display: none; }
+@media (max-width: 760px) {
+  .wheel-m {
+    display: block; padding: 22px 20px 8px; border-radius: 4px; background: #fff; color: #1F2430;
+    box-shadow: 0 0 0 1px rgba(17, 17, 17, 0.05), 0 14px 28px -14px rgba(17, 17, 17, 0.2);
+  }
+  .wm-title { margin: 0; font-size: 19px; line-height: 1.25; font-weight: 600; letter-spacing: -0.01em; }
+  .wm-sub { margin: 8px 0 0; font-size: 14px; line-height: 1.45; color: #4B5563; }
+  .wm-ring { position: relative; width: min(100%, 300px); aspect-ratio: 1; margin: 26px auto 18px; }
+  .wm-ring > img { display: block; width: 100%; height: 100%; }
+  .wm-center { position: absolute; left: 31.2%; top: 39.2%; width: 37.6%; display: flex; flex-direction: column; align-items: center; gap: 5px; text-align: center; }
+  .wm-center b { font-size: clamp(17px, 6vw, 21px); line-height: 1.15; font-weight: 600; letter-spacing: -0.01em; }
+  .wm-center span { font-size: 11px; line-height: 1.2; color: #4B5563; }
+  .wm-badge { display: grid; place-items: center; box-sizing: border-box; border: 2.25px solid var(--bc); border-radius: 50%; background: #fff; color: #1F2430; font-style: normal; font-weight: 600; }
+  .wm-b1 { --bc: #F4A894; } .wm-b2 { --bc: #EE8A71; } .wm-b3 { --bc: #D9573F; }
+  .wm-ring .wm-badge { position: absolute; width: 10.5%; height: 10.5%; font-size: 13px; border-width: 2.5px; }
+  .wm-ring .wm-b1 { left: 77.84%; top: 23.24%; } .wm-ring .wm-b2 { left: 46.8%; top: 84.16%; } .wm-ring .wm-b3 { left: 9.57%; top: 26.82%; }
+  .wm-steps { list-style: none; margin: 0; padding: 0; }
+  .wm-steps li { display: flex; gap: 12px; padding: 18px 0; border-top: 1px solid #D1D5DB; }
+  .wm-steps .wm-badge { flex: none; width: 28px; height: 28px; font-size: 12px; }
+  .wm-steps b { display: block; font-size: 17px; line-height: 1.25; font-weight: 600; }
+  .wm-steps p { margin: 4px 0 0; font-size: 14px; line-height: 1.45; color: #4B5563; }
+}
