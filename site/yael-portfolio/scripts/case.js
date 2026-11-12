@@ -51,9 +51,6 @@
   if (p.lead) document.querySelector('.case-lead').textContent = p.lead;
   // lead: false drops the opening statement under the meta row
   if (p.lead === false) document.querySelector('.case-lead').remove();
-  // intro: a short paragraph of context under the opening statement
-  const introEl = document.querySelector('.case-intro');
-  if (p.intro) { introEl.textContent = p.intro; introEl.hidden = false; } else introEl.remove();
   // longTitle: a long project name is set smaller so it stays on one line
   if (p.longTitle) document.querySelector('.case-title h1').classList.add('is-long');
   // titleSize: a project can set its own title size (any CSS length, e.g. a clamp())

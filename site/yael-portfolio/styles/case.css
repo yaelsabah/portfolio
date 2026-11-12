@@ -65,9 +65,6 @@
   line-height: 1.18;
 }
 
-.case-intro { margin: 40px auto 0; max-width: 54ch; font-size: 18px; line-height: 1.6; color: var(--muted); text-wrap: pretty; }
-.case-intro[hidden] { display: none; }
-
 .case-section-title { margin: 0 0 16px; font-size: 22px; font-weight: 500; }
 
 /* ---------- Chapters (all open, read straight down) ---------- */
