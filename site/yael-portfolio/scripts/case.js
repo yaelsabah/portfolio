@@ -472,6 +472,23 @@
         } else start();
       } else {
         media.append(img);
+        // chart: on phones the picture is swapped for the same chart rebuilt as horizontal bars (see styles/refine.css)
+        if (c.media.chart) {
+          const ch = c.media.chart, esc = (t) => String(t).replace(/[&<>"]/g, (m) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[m]));
+          media.classList.add('has-m-chart');
+          const m = document.createElement('div');
+          m.className = 'funnel-m';
+          m.setAttribute('role', 'group');
+          m.setAttribute('aria-label', ch.title);
+          m.innerHTML = '<h4 class="fm-title">' + esc(ch.title) + '</h4>' +
+            '<div class="fm-overall"><span class="fm-overall-label">' + esc(ch.overall.label) + '</span><strong>' + esc(ch.overall.value) + '</strong><p>' + esc(ch.overall.text) + '</p></div>' +
+            '<ol class="fm-steps">' + ch.steps.map((st) =>
+              (st.drop ? '<li class="fm-drop" aria-label="Down ' + esc(st.drop) + '"><span aria-hidden="true">↓ ' + esc(st.drop) + '</span></li>' : '') +
+              '<li class="fm-step"><div class="fm-label"><span>' + esc(st.step) + '</span><b>' + esc(st.name) + '</b></div>' +
+              '<div class="fm-value"><strong>' + esc(st.value) + '</strong><span>' + esc(st.of) + '</span></div>' +
+              '<div class="fm-track"><i style="--w:' + st.share + '%"></i></div></li>').join('') + '</ol>';
+          media.append(m);
+        }
       }
     } else if (c.media.placeholder) {
       const ph = document.createElement('span');

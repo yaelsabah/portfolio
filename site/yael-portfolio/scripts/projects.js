@@ -146,7 +146,14 @@ window.PROJECTS = [
         sections: [
           { title: 'The funnel',
             body: ['In the last 30 days, 391.4K people registered through the family tree. 197.4K started Magic 7, 98.1K finished it, and only 28.8K added a relative on their own afterwards.'],
-            media: { src: 'assets/images/checklist/funnel-v2.png', wide: true, bare: true, alt: 'A bar chart of the family tree funnel over the last 30 days: 391.4K registered, 197.4K (50.43%) started Magic 7, 98.11K (25.07%) completed it, and 28.81K (7.36%) added an individual manually. Overall, 7.36% of registrants reach step 4.' } },
+            media: { chart: { title: '7.36% of registrants reach step 4',
+                       overall: { label: 'Overall', value: '7.36%', text: 'of registrants reach step Adding Individual Manually, from 391.4K to 28.81K' },
+                       // share: the bar's length as a percentage of the first step; drop: the fall from the step before
+                       steps: [{ step: 'Step 1', name: 'Registration', value: '391.4K', of: '100% of registrants', share: 100 },
+                               { step: 'Step 2', name: 'Magic 7 Start', value: '197.4K', of: '50.43% of registrants', share: 50.43, drop: '50.43%' },
+                               { step: 'Step 3', name: 'Magic 7 Completed', value: '98.11K', of: '25.07% of registrants', share: 25.07, drop: '49.7%' },
+                               { step: 'Step 4', name: 'Adding Individual Manually', value: '28.81K', of: '7.36% of registrants', share: 7.36, drop: '29.36%' }] },
+            src: 'assets/images/checklist/funnel-v2.png', wide: true, bare: true, alt: 'A bar chart of the family tree funnel over the last 30 days: 391.4K registered, 197.4K (50.43%) started Magic 7, 98.11K (25.07%) completed it, and 28.81K (7.36%) added an individual manually. Overall, 7.36% of registrants reach step 4.' } },
           { title: 'What the numbers say',
             stats: [
               { number: '50%', text: 'of users who start Magic 7 finish it. The other half never reach their first moment of value.' },

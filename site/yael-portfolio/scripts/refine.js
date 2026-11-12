@@ -27,6 +27,8 @@
   const ruled = [...document.querySelectorAll('.chapter')].filter((c) => parseFloat(getComputedStyle(c).borderTopWidth) > 0);
   ruled.forEach((c) => c.classList.add('rf-rule'));
   watch([...document.querySelectorAll('.case-meta, .project-nav'), ...ruled], 'rf-in');
+  // the funnel chart on phones: the bars grow as it comes into view
+  watch([...document.querySelectorAll('.funnel-m')], 'is-in');
 
   // arrows
   const svg = (cls, d) => `<svg class="link-arrow ${cls}" viewBox="0 0 11 11" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path d="${d}"/></svg>`;
